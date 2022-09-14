@@ -246,14 +246,17 @@ sel.fit(X_res_train, y_res_train)
 
 sel.get_support()
 ``````
+![Screenshot 2022-09-15 013425](https://user-images.githubusercontent.com/113499057/190235542-9e1f67c0-2ff4-4ea4-ae80-63b12cb5ed6f.jpg)
 ``````
 selected_feat = X_res_train.columns[(sel.get_support())]
 print(selected_feat)
 ``````
+![Screenshot 2022-09-15 013456](https://user-images.githubusercontent.com/113499057/190235628-7520788b-a659-4661-a4fd-48b04eae11ab.jpg)
 ``````
 X_train_selected = X_res_train.loc[:,selected_feat]
 X_test_selected = X_res_test.loc[:,selected_feat]
 ``````
+![Screenshot 2022-09-15 013634](https://user-images.githubusercontent.com/113499057/190235647-d1cc4775-84df-46c8-a114-62d02470040a.jpg)
 ``````
 # use GridSerchCV to find the best parameter by exhaustive search over specified parameter values for an estimator.
 
