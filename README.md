@@ -97,8 +97,6 @@ plt.show()
 ``````
 print(f"After dropped some data : {n} rows and {m} columns.")
 ``````
-![Screenshot 2022-09-14 234158](https://user-images.githubusercontent.com/113499057/190214840-c7cdf8fe-0968-4f53-84d3-940b0759c23f.jpg)
-
 Check unique element in qualitative variables
 ``````
 column_keys=df.select_dtypes(include=['object']).columns.tolist()
@@ -107,8 +105,13 @@ for key in column_keys:
     print(df[key].unique(),end='\n')
     print(end='\n')
 ``````
-![Screenshot 2022-09-14 234238](https://user-images.githubusercontent.com/113499057/190216056-31605264-4bf7-49d5-99e8-d608197e6853.jpg)
+``````
+# Agency = Agency Type so delete Agency variable?
 
+A = pd.DataFrame(df.groupby(["Agency","Agency Type", "Claim"]).size(), columns=['Frequency'])
+A['Percent'] = round((A['Frequency'] / n)*100 , 2)
+A
+``````
 Explore target variable because our data is imbalanced data.
 ``````
 yes = df[df.Claim == 'Yes']
@@ -118,17 +121,6 @@ DN = pd.DataFrame(yes.groupby(["Destination"]).size(), columns=['Frequency'])
 DN['Percent'] = round((DN['Frequency'] / n_yes)*100 , 2)
 DN.sort_values('Frequency', ascending=False).head(10)
 ``````
-![Screenshot 2022-09-14 234329](https://user-images.githubusercontent.com/113499057/190216962-fec0acbf-fdd4-4f69-8fec-70e015053aea.jpg)
-``````
-# Agency = Agency Type so delete Agency variable?
-
-A = pd.DataFrame(df.groupby(["Agency","Agency Type", "Claim"]).size(), columns=['Frequency'])
-A['Percent'] = round((A['Frequency'] / n)*100 , 2)
-A
-
-``````
-![Screenshot 2022-09-14 234458](https://user-images.githubusercontent.com/113499057/190217803-de3da4a6-4bed-4a2a-b65d-bd6d03e897e5.jpg)
-
 Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
 ``````
 # Agency Type : Airlines=1, TravelAgency:0
@@ -144,20 +136,28 @@ df["Des_Singapore"] = np.where((df["Destination"] == 'SINGAPORE'), 1,0)
 df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
 
 # Create dummy variables only Product Name and Destination variable
-dm = pd.get_dummies(df, columns = ['Product Name','Destination'])
-dm
+data = pd.get_dummies(df, columns = ['Product Name','Destination'])
+data
 ``````
-![Screenshot 2022-09-15 001037](https://user-images.githubusercontent.com/113499057/190219200-adbb970e-c930-4b9c-bc60-81236d9e00c6.jpg)
-
+``````
+data.drop('Destination_SINGAPORE', axis=1, inplace=True)
+``````
 ## Mechine Learning
 ``````
 from sklearn.preprocessing import StandardScaler
+``````
+``````
+Y = pd.DataFrame(data.loc[:,'Claim'], columns=['Claim'])
+
+data.drop('Claim', axis=1, inplace=True)
+X = data
 ``````
 ``````
 scaler = StandardScaler()
 scaler.fit(X.loc[:,"Duration":"Age"])
 X_scale = scaler.transform(X.loc[:,"Duration":"Age"])
 X.loc[:,"Duration":"Age"] = X_scale
+X
 ``````
 ``````
 from sklearn.model_selection import train_test_split
@@ -195,6 +195,7 @@ results = pd.DataFrame(values[1:], columns=values[0])
 results
 ``````
 ``````
+# Undersampling for imbalanced data
 iht = InstanceHardnessThreshold(random_state=42)
 X_res, Y_res = iht.fit_resample(X, Y)
 ``````
@@ -202,6 +203,21 @@ X_res, Y_res = iht.fit_resample(X, Y)
 claim_res = pd.DataFrame(Y_res.groupby(["Claim"]).size(), columns=['Frequency'])
 claim_res['Percent'] = round((claim_res['Frequency'] / Y_res.shape[0])*100 , 2)
 claim_res
+``````
+``````
+X_res_train, X_res_test, y_res_train, y_res_test = train_test_split(X_res, Y_res, test_size=0.2, random_state=42, stratify=Y_res)
+``````
+``````
+values = []
+models = [ RandomForestClassifier(), LogisticRegression(), DecisionTreeClassifier(random_state=42), SVC(), KNeighborsClassifier(), XGBClassifier()]
+for m in models:
+  m.fit(X_res_train, y_res_train)
+  y_res_pred = m.predict(X_res_test)
+  print(m)
+  print(classification_report(y_res_test, y_res_pred)[1])
+  print(confusion_matrix(y_res_test, y_res_pred))
+  values.append([str(m)[:10], f1_score(y_res_test,y_res_pred), roc_auc_score(y_res_test,y_res_pred), recall_score(y_res_test,y_res_pred), precision_score(y_res_test,y_res_pred)])
+  print('='*60)
 ``````
 ``````
 values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
@@ -213,6 +229,10 @@ sel = SelectFromModel(RandomForestClassifier())
 sel.fit(X_res_train, y_res_train)
 
 sel.get_support()
+``````
+``````
+selected_feat = X_res_train.columns[(sel.get_support())]
+print(selected_feat)
 ``````
 ``````
 X_train_selected = X_res_train.loc[:,selected_feat]
