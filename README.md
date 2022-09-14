@@ -93,6 +93,7 @@ plt.ylabel("Number of people")
 plt.title("Distribution of Age")
 plt.show()
 ``````
+![Screenshot 2022-09-14 221644](https://user-images.githubusercontent.com/113499057/190212662-a02c6f46-282c-4c4c-9624-a75edd26f941.jpg)
 ``````
 print(f"After dropped some data : {n} rows and {m} columns.")
 ``````
