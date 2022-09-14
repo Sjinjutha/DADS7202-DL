@@ -108,6 +108,7 @@ for key in column_keys:
     print(df[key].unique(),end='\n')
     print(end='\n')
 ``````
+![Screenshot 2022-09-14 234238](https://user-images.githubusercontent.com/113499057/190226352-6145c0ee-1ec2-4ed0-a973-245e64e3c599.jpg)
 ``````
 # Agency = Agency Type so delete Agency variable?
 
