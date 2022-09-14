@@ -1,25 +1,33 @@
 # DADS7202-Deep Learning Hw01
 
-# Data Preparing
+## Data Preparing
+
+Import library
 ```
 import pandas as np
 import numpy as np
 import matplotlib.pyplot as plt
 ```
+Download dataset to your google drive and mount it.
 ```
+from google.colab import drive
+drive.mount('/content/drive')
 df = pd.read_csv("/content/drive/MyDrive/travel_insurance.csv")
 df.head()
 ``````
+Check data information & missing value
 ``````
 df.info()
 ``````
 ``````
 n = df.shape[0]
-n
+print(f"Number of rows {n}")
 ``````
 ``````
-df.isnull().sum()
+# percent of missing "Gender" 
+print('Percent of missing "Gender" records is %.2f%%' %((df['Gender'].isnull().sum()/df.shape[0])*100))
 ``````
+Percent of missing "Gender" records is 71.23%, so we decide to drop Gender variable.
 ``````
 df = df.drop(['Gender'], axis = 1)
 df.head()
@@ -29,11 +37,13 @@ new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Durati
 df = df.reindex(columns=new_cols)
 df.head()
 ``````
+Check number of data per binary classification (Cliam: Yes,No)
 ``````
 claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
 claim['Percent'] = round((claim['Frequency'] / n)*100 , 2)
 claim
 ``````
+Even though Age variable does not has missing value but it has outlier.
 ``````
 figure_age = plt.figure(figsize = (10, 5))
 plt.hist(df['Age'])
@@ -42,11 +52,11 @@ plt.ylabel("Number of people")
 plt.title("Distribution of Age")
 plt.show()
 ``````
+Reference with normal distribution, we decide to delete data which has age >= 118
 ``````
 df['Age'] = np.where(df['Age'] >= df['Age'].quantile(0.997), np.nan, df['Age'])
 df = df.dropna()
-``````
-``````
+
 figure_age = plt.figure(figsize = (10, 5))
 plt.hist(df['Age'])
 plt.xlabel("Age")
