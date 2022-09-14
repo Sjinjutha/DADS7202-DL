@@ -15,6 +15,7 @@ drive.mount('/content/drive')
 df = pd.read_csv("/content/drive/MyDrive/travel_insurance.csv")
 df.head()
 ``````
+![messageImage_1663155344482](https://user-images.githubusercontent.com/113499057/190183725-cab5192e-8709-4541-86a2-26657b112123.jpg)
 Check data information & missing value
 ``````
 df.info()
