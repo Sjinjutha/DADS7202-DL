@@ -85,6 +85,7 @@ Reference with normal distribution, we decide to delete data which has age >= 11
 ``````
 df['Age'] = np.where(df['Age'] >= df['Age'].quantile(0.997), np.nan, df['Age'])
 df = df.dropna()
+![Screenshot 2022-09-14 234158](https://user-images.githubusercontent.com/113499057/190225773-0e458d58-4797-4f6a-a4ad-3ce1d82421c1.jpg)
 
 figure_age = plt.figure(figsize = (10, 5))
 plt.hist(df['Age'])
@@ -97,6 +98,8 @@ plt.show()
 ``````
 print(f"After dropped some data : {n} rows and {m} columns.")
 ``````
+![Screenshot 2022-09-14 234158](https://user-images.githubusercontent.com/113499057/190225773-0e458d58-4797-4f6a-a4ad-3ce1d82421c1.jpg)
+
 Check unique element in qualitative variables
 ``````
 column_keys=df.select_dtypes(include=['object']).columns.tolist()
