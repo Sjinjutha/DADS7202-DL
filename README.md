@@ -198,6 +198,8 @@ for m in models:
   values.append([str(m)[:10], f1_score(y_test,y_pred), roc_auc_score(y_test,y_pred), recall_score(y_test,y_pred), precision_score(y_test,y_pred)])
   print('==========================================================')
 ``````
+![Screenshot 2022-09-15 003128](https://user-images.githubusercontent.com/113499057/190229559-ca6de4ac-f0a6-4859-afb2-a4767a0eb366.jpg)
+![Screenshot 2022-09-15 003409](https://user-images.githubusercontent.com/113499057/190229586-d3cb33bc-4e4d-48fe-b0e9-23f097ec9daf.jpg)
 ``````
 values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
 results = pd.DataFrame(values[1:], columns=values[0])
