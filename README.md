@@ -68,6 +68,7 @@ plt.show()
 n = df.shape[0]
 n
 ``````
+Check unique element in qualitative variables
 ``````
 column_keys=df.select_dtypes(include=['object']).columns.tolist()
 for key in column_keys:
@@ -75,19 +76,16 @@ for key in column_keys:
     print(df[key].unique(),end='\n')
     print(end='\n')
 ``````
-``````
-df_dummy = pd.get_dummies(df, columns = ['Agency','Agency Type','Distribution Channel','Product Name','Destination'])
-df_dummy
-``````
+Explore target variable because our data is imbalanced data.
 ``````
 yes = df[df.Claim == 'Yes']
 n_yes = yes.shape[0]
-``````
-``````
+
 DN = pd.DataFrame(yes.groupby(["Destination"]).size(), columns=['Frequency'])
 DN['Percent'] = round((DN['Frequency'] / n_yes)*100 , 2)
 DN.sort_values('Frequency', ascending=False).head(10)
 ``````
+Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
 ``````
 # Agency Type : Airlines=1, TravelAgency:0
 df["Agency Type"] = np.where((df["Agency Type"] == 'Airlines'), 1,0)
