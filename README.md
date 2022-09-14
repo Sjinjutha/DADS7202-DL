@@ -116,6 +116,8 @@ A = pd.DataFrame(df.groupby(["Agency","Agency Type", "Claim"]).size(), columns=[
 A['Percent'] = round((A['Frequency'] / n)*100 , 2)
 A
 ``````
+![Screenshot 2022-09-14 234329](https://user-images.githubusercontent.com/113499057/190226623-d260b3b7-46af-490c-bc28-362bf1c5bacf.jpg)
+
 Explore target variable because our data is imbalanced data.
 ``````
 yes = df[df.Claim == 'Yes']
