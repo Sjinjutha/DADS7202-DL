@@ -46,7 +46,7 @@ print(f"Data contains {n} rows and {m} columns.")
 ![Screenshot 2022-09-14 221430](https://user-images.githubusercontent.com/113499057/190198230-0080316e-d02b-4bdd-8189-22811f45786b.jpg)
 ``````
 # percent of missing "Gender" 
-print('Percent of missing "Gender" records is %.2f%%' %((df['Gender'].isnull().sum()/df.shape[0])*100))
+print('Percent of missing "Gender" records is %.2f%%' %((df['Gender'].isnull().sum()/n)*100))
 ``````
 ![Screenshot 2022-09-14 215708](https://user-images.githubusercontent.com/113499057/190197245-cd2c984d-8c7b-4634-b6e6-652e1273f797.jpg)
 
@@ -55,21 +55,17 @@ Percent of missing "Gender" records is 71.23%, so we decide to drop Gender varia
 df = df.drop(['Gender'], axis = 1)
 df.head()
 ``````
-![Screenshot 2022-09-14 221513](https://user-images.githubusercontent.com/113499057/190198523-f7d03a46-de0a-4584-b4f7-dabce931e043.jpg)
 ``````
 new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Duration','Destination','Net Sales','Commision (in value)','Age','Claim']
 df = df.reindex(columns=new_cols)
 df.head()
 ``````
-![Screenshot 2022-09-14 221530](https://user-images.githubusercontent.com/113499057/190198951-a10358d1-5adb-4f71-ba40-0fea50675381.jpg)
 Check number of data per binary classification (Cliam: Yes,No). There is imbalanced dataset.
 ``````
 claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
 claim['Percent'] = round((claim['Frequency'] / n)*100 , 2)
 claim
 ``````
-![Screenshot 2022-09-14 221557](https://user-images.githubusercontent.com/113499057/190199030-07c273b8-3e97-4e69-92ec-0129fe60c5db.jpg)
-
 Even though Age variable does not has missing value but it has outlier.
 ``````
 figure_age = plt.figure(figsize = (10, 5))
@@ -203,7 +199,46 @@ sel.fit(X_res_train, y_res_train)
 sel.get_support()
 ``````
 ``````
+X_train_selected = X_res_train.loc[:,selected_feat]
+X_test_selected = X_res_test.loc[:,selected_feat]
+``````
+``````
+# use GridSerchCV to find the best parameter by exhaustive search over specified parameter values for an estimator.
 
+from sklearn.model_selection import GridSearchCV
+
+clf = RandomForestClassifier(random_state=42)
+
+# defining parameter range
+param_grid = {'criterion':['gini','entropy','log_loss'],
+              'max_depth':[int(x) for x in range(2,21,1)],
+              'max_features':['sqrt','log2'],
+              'class_weight':['balanced','balanced_subsample',None]
+              }
+
+grid = GridSearchCV(clf, param_grid, cv=10, scoring='f1', return_train_score=True, verbose=1)
+  
+# fitting the model for grid search
+grid_search = grid.fit(X_train_selected, y_res_train)
+
+print(grid_search.best_params_)
+``````
+``````
+rf = RandomForestClassifier(random_state=42)
+rf.fit(X_train_selected, y_res_train)
+y_selected_pred = rf.predict(X_test_selected)
+  
+print(classification_report(y_res_test, y_selected_pred)[1])
+print(confusion_matrix(y_res_test, y_selected_pred))
+
+values = []
+values.append([str(rf)[:10], f1_score(y_res_test,y_selected_pred), roc_auc_score(y_res_test,y_selected_pred), 
+               recall_score(y_res_test,y_selected_pred), precision_score(y_res_test,y_selected_pred)])
+``````
+``````
+values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
+results = pd.DataFrame(values[1:], columns=values[0])
+results
 ``````
 
 ## Deep Learning (MLP)
