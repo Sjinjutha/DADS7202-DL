@@ -232,6 +232,8 @@ for m in models:
   values.append([str(m)[:10], f1_score(y_res_test,y_res_pred), roc_auc_score(y_res_test,y_res_pred), recall_score(y_res_test,y_res_pred), precision_score(y_res_test,y_res_pred)])
   print('='*60)
 ``````
+![Screenshot 2022-09-15 012643](https://user-images.githubusercontent.com/113499057/190233921-edf2036e-d090-4f1f-bce6-fca9ef309d35.jpg)
+
 ``````
 values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
 results = pd.DataFrame(values[1:],columns=values[0])
