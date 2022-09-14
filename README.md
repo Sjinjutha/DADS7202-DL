@@ -98,11 +98,13 @@ df["Des_Singapore"] = np.where((df["Destination"] == 'SINGAPORE'), 1,0)
 
 # Target variable 'Claim' : Yes=1, No=0
 df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
-df.head(10)
-``````
-``````
+
+# Create dummy variables
 dm = pd.get_dummies(df, columns = ['Product Name','Destination'])
 dm
+``````
+``````
+
 ``````
 ``````
 
