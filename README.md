@@ -97,6 +97,8 @@ plt.show()
 ``````
 print(f"After dropped some data : {n} rows and {m} columns.")
 ``````
+![Screenshot 2022-09-14 234158](https://user-images.githubusercontent.com/113499057/190214840-c7cdf8fe-0968-4f53-84d3-940b0759c23f.jpg)
+
 Check unique element in qualitative variables
 ``````
 column_keys=df.select_dtypes(include=['object']).columns.tolist()
