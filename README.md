@@ -118,6 +118,7 @@ DN = pd.DataFrame(yes.groupby(["Destination"]).size(), columns=['Frequency'])
 DN['Percent'] = round((DN['Frequency'] / n_yes)*100 , 2)
 DN.sort_values('Frequency', ascending=False).head(10)
 ``````
+![Screenshot 2022-09-14 234329](https://user-images.githubusercontent.com/113499057/190216962-fec0acbf-fdd4-4f69-8fec-70e015053aea.jpg)
 ``````
 # Agency = Agency Type so delete Agency variable?
 
