@@ -147,6 +147,7 @@ df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
 data = pd.get_dummies(df, columns = ['Product Name','Destination'])
 data
 ``````
+![Screenshot 2022-09-15 001037](https://user-images.githubusercontent.com/113499057/190228595-e843638e-f5ff-4ad9-8f5c-edd04403f65d.jpg)
 ``````
 data.drop('Destination_SINGAPORE', axis=1, inplace=True)
 ``````
