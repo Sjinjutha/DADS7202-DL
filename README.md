@@ -147,7 +147,7 @@ df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
 dm = pd.get_dummies(df, columns = ['Product Name','Destination'])
 dm
 ``````
-![image](https://user-images.githubusercontent.com/113499057/190218504-8cdaa8da-e828-4a98-bae5-3a1a0c72b234.png)
+![Screenshot 2022-09-15 001037](https://user-images.githubusercontent.com/113499057/190219200-adbb970e-c930-4b9c-bc60-81236d9e00c6.jpg)
 
 ## Mechine Learning
 ``````
