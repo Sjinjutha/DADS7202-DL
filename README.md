@@ -205,6 +205,7 @@ values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_sc
 results = pd.DataFrame(values[1:], columns=values[0])
 results
 ``````
+![Screenshot 2022-09-15 003514](https://user-images.githubusercontent.com/113499057/190229948-2f9db5c5-551d-4a4f-ab7a-4e3ddfca9e37.jpg)
 ``````
 # Undersampling for imbalanced data
 iht = InstanceHardnessThreshold(random_state=42)
