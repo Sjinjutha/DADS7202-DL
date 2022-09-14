@@ -61,6 +61,7 @@ new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Durati
 df = df.reindex(columns=new_cols)
 df.head()
 ``````
+![Screenshot 2022-09-14 221530](https://user-images.githubusercontent.com/113499057/190211071-65a4cde0-b810-441f-a6d8-83e1970d0dff.jpg)
 Check number of data per binary classification (Cliam: Yes,No). There is imbalanced dataset.
 ``````
 claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
