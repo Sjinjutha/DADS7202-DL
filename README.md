@@ -38,7 +38,8 @@ df.info()
 ``````
 ``````
 n = df.shape[0]
-print(f"Number of rows {n}")
+m = df.shape[1]
+print(f"Data contains {n} rows and {m} columns.")
 ``````
 ``````
 # percent of missing "Gender" 
@@ -54,7 +55,7 @@ new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Durati
 df = df.reindex(columns=new_cols)
 df.head()
 ``````
-Check number of data per binary classification (Cliam: Yes,No)
+Check number of data per binary classification (Cliam: Yes,No). There is imbalanced dataset.
 ``````
 claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
 claim['Percent'] = round((claim['Frequency'] / n)*100 , 2)
@@ -82,8 +83,7 @@ plt.title("Distribution of Age")
 plt.show()
 ``````
 ``````
-n = df.shape[0]
-n
+print(f"After dropped some data : {n} rows and {m} columns.")
 ``````
 Check unique element in qualitative variables
 ``````
@@ -102,6 +102,14 @@ DN = pd.DataFrame(yes.groupby(["Destination"]).size(), columns=['Frequency'])
 DN['Percent'] = round((DN['Frequency'] / n_yes)*100 , 2)
 DN.sort_values('Frequency', ascending=False).head(10)
 ``````
+``````
+# Agency = Agency Type so delete Agency variable?
+
+A = pd.DataFrame(df.groupby(["Agency","Agency Type", "Claim"]).size(), columns=['Frequency'])
+A['Percent'] = round((A['Frequency'] / n)*100 , 2)
+A
+
+``````
 Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
 ``````
 # Agency Type : Airlines=1, TravelAgency:0
@@ -116,7 +124,7 @@ df["Des_Singapore"] = np.where((df["Destination"] == 'SINGAPORE'), 1,0)
 # Target variable 'Claim' : Yes=1, No=0
 df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
 
-# Create dummy variables
+# Create dummy variables only Product Name and Destination variable
 dm = pd.get_dummies(df, columns = ['Product Name','Destination'])
 dm
 ``````
