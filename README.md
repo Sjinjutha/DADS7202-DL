@@ -216,6 +216,7 @@ claim_res = pd.DataFrame(Y_res.groupby(["Claim"]).size(), columns=['Frequency'])
 claim_res['Percent'] = round((claim_res['Frequency'] / Y_res.shape[0])*100 , 2)
 claim_res
 ``````
+![Screenshot 2022-09-15 003600](https://user-images.githubusercontent.com/113499057/190230619-e79d4abd-d395-4cbf-ab7c-dc5988a17530.jpg)
 ``````
 X_res_train, X_res_test, y_res_train, y_res_test = train_test_split(X_res, Y_res, test_size=0.2, random_state=42, stratify=Y_res)
 ``````
