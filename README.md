@@ -239,6 +239,7 @@ values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_sc
 results = pd.DataFrame(values[1:],columns=values[0])
 results
 ``````
+![Screenshot 2022-09-15 012318](https://user-images.githubusercontent.com/113499057/190234521-22191ee6-04b6-4588-b60f-3ae08bd03aa2.jpg)
 ``````
 sel = SelectFromModel(RandomForestClassifier())
 sel.fit(X_res_train, y_res_train)
