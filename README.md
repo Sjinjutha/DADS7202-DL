@@ -68,6 +68,8 @@ claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
 claim['Percent'] = round((claim['Frequency'] / n)*100 , 2)
 claim
 ``````
+![Screenshot 2022-09-14 221557](https://user-images.githubusercontent.com/113499057/190211624-cb257fbc-e3a5-43e1-b5d0-debe8e9f703f.jpg)
+
 Even though Age variable does not has missing value but it has outlier.
 ``````
 figure_age = plt.figure(figsize = (10, 5))
