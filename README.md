@@ -43,7 +43,7 @@ n = df.shape[0]
 m = df.shape[1]
 print(f"Data contains {n} rows and {m} columns.")
 ``````
-
+![Screenshot 2022-09-14 221430](https://user-images.githubusercontent.com/113499057/190198230-0080316e-d02b-4bdd-8189-22811f45786b.jpg)
 ``````
 # percent of missing "Gender" 
 print('Percent of missing "Gender" records is %.2f%%' %((df['Gender'].isnull().sum()/df.shape[0])*100))
