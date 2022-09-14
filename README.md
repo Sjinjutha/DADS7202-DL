@@ -127,6 +127,8 @@ A['Percent'] = round((A['Frequency'] / n)*100 , 2)
 A
 
 ``````
+![Screenshot 2022-09-14 234458](https://user-images.githubusercontent.com/113499057/190217803-de3da4a6-4bed-4a2a-b65d-bd6d03e897e5.jpg)
+
 Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
 ``````
 # Agency Type : Airlines=1, TravelAgency:0
@@ -145,6 +147,8 @@ df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
 dm = pd.get_dummies(df, columns = ['Product Name','Destination'])
 dm
 ``````
+![image](https://user-images.githubusercontent.com/113499057/190218504-8cdaa8da-e828-4a98-bae5-3a1a0c72b234.png)
+
 ## Mechine Learning
 ``````
 from sklearn.preprocessing import StandardScaler
