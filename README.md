@@ -61,12 +61,15 @@ new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Durati
 df = df.reindex(columns=new_cols)
 df.head()
 ``````
+![Screenshot 2022-09-14 221530](https://user-images.githubusercontent.com/113499057/190198951-a10358d1-5adb-4f71-ba40-0fea50675381.jpg)
 Check number of data per binary classification (Cliam: Yes,No). There is imbalanced dataset.
 ``````
 claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
 claim['Percent'] = round((claim['Frequency'] / n)*100 , 2)
 claim
 ``````
+![Screenshot 2022-09-14 221557](https://user-images.githubusercontent.com/113499057/190199030-07c273b8-3e97-4e69-92ec-0129fe60c5db.jpg)
+
 Even though Age variable does not has missing value but it has outlier.
 ``````
 figure_age = plt.figure(figsize = (10, 5))
