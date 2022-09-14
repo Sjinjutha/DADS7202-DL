@@ -20,6 +20,8 @@ Check data information & missing value
 ``````
 df.info()
 ``````
+![Screenshot 2022-09-14 212635](https://user-images.githubusercontent.com/113499057/190188125-a11a2174-a904-4480-a0f8-d5685dab4dc0.jpg)
+
 ``````
 n = df.shape[0]
 print(f"Number of rows {n}")
