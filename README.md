@@ -1,5 +1,22 @@
 # DADS7202-Deep Learning Hw01
 
+## About Dataset
+A third-party travel insurance servicing company that is based in Singapore.
+
+The attributes:
+
+1. Target: Claim Status (Claim.Status)
+2. Name of agency (Agency)
+3. Type of travel insurance agencies (Agency.Type)
+4. Distribution channel of travel insurance agencies (Distribution.Channel)
+5. Name of the travel insurance products (Product.Name)
+6. Duration of travel (Duration)
+7. Destination of travel (Destination)
+8. Amount of sales of travel insurance policies (Net.Sales)
+9. Commission received for travel insurance agency (Commission)
+10. Gender of insured (Gender)
+11. Age of insured (Age)
+
 ## Data Preparing
 
 Import library
@@ -15,13 +32,10 @@ drive.mount('/content/drive')
 df = pd.read_csv("/content/drive/MyDrive/travel_insurance.csv")
 df.head()
 ``````
-![messageImage_1663155344482](https://user-images.githubusercontent.com/113499057/190183725-cab5192e-8709-4541-86a2-26657b112123.jpg)
 Check data information & missing value
 ``````
 df.info()
 ``````
-![Screenshot 2022-09-14 212635](https://user-images.githubusercontent.com/113499057/190188125-a11a2174-a904-4480-a0f8-d5685dab4dc0.jpg)
-
 ``````
 n = df.shape[0]
 print(f"Number of rows {n}")
