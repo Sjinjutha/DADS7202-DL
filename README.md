@@ -107,6 +107,8 @@ for key in column_keys:
     print(df[key].unique(),end='\n')
     print(end='\n')
 ``````
+![Screenshot 2022-09-14 234238](https://user-images.githubusercontent.com/113499057/190216056-31605264-4bf7-49d5-99e8-d608197e6853.jpg)
+
 Explore target variable because our data is imbalanced data.
 ``````
 yes = df[df.Claim == 'Yes']
