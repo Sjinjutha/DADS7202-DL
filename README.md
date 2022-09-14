@@ -55,6 +55,7 @@ Percent of missing "Gender" records is 71.23%, so we decide to drop Gender varia
 df = df.drop(['Gender'], axis = 1)
 df.head()
 ``````
+![Screenshot 2022-09-14 221513](https://user-images.githubusercontent.com/113499057/190198523-f7d03a46-de0a-4584-b4f7-dabce931e043.jpg)
 ``````
 new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Duration','Destination','Net Sales','Commision (in value)','Age','Claim']
 df = df.reindex(columns=new_cols)
