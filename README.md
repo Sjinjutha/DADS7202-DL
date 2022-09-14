@@ -32,10 +32,12 @@ drive.mount('/content/drive')
 df = pd.read_csv("/content/drive/MyDrive/travel_insurance.csv")
 df.head()
 ``````
+
 Check data information & missing value
 ``````
 df.info()
 ``````
+![Screenshot 2022-09-14 212635](https://user-images.githubusercontent.com/113499057/190195652-d0b5cb8b-ce40-4894-8cd9-5fec4b89edd9.jpg)
 ``````
 n = df.shape[0]
 m = df.shape[1]
