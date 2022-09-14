@@ -32,8 +32,6 @@ drive.mount('/content/drive')
 df = pd.read_csv("/content/drive/MyDrive/travel_insurance.csv")
 df.head()
 ``````
-![messageImage_1663155344482](https://user-images.githubusercontent.com/113499057/190191321-f68b47f6-3cbe-4254-95dc-bc545c8fcad4.jpg)
-
 Check data information & missing value
 ``````
 df.info()
@@ -130,10 +128,74 @@ df["Claim"] = np.where((df["Claim"] == 'Yes'), 1,0)
 dm = pd.get_dummies(df, columns = ['Product Name','Destination'])
 dm
 ``````
+## Mechine Learning
+``````
+from sklearn.preprocessing import StandardScaler
+``````
+``````
+scaler = StandardScaler()
+scaler.fit(X.loc[:,"Duration":"Age"])
+X_scale = scaler.transform(X.loc[:,"Duration":"Age"])
+X.loc[:,"Duration":"Age"] = X_scale
+``````
+``````
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost.sklearn import XGBClassifier
+from imblearn.under_sampling import InstanceHardnessThreshold
+
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.metrics import f1_score, roc_auc_score, recall_score, precision_score, confusion_matrix, classification_report
+
+from sklearn.feature_selection import SelectFromModel
+``````
+``````
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42, stratify=Y)
+``````
+``````
+values = []
+models = [ RandomForestClassifier(), LogisticRegression(), DecisionTreeClassifier(), SVC(), KNeighborsClassifier(), XGBClassifier()]
+for m in models:
+  m.fit(X_train, y_train)
+  y_pred = m.predict(X_test)
+  print(m)
+  print(classification_report(y_test,y_pred)[1])
+  print(confusion_matrix(y_test,y_pred))
+  values.append([str(m)[:10], f1_score(y_test,y_pred), roc_auc_score(y_test,y_pred), recall_score(y_test,y_pred), precision_score(y_test,y_pred)])
+  print('==========================================================')
+``````
+``````
+values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
+results = pd.DataFrame(values[1:], columns=values[0])
+results
+``````
+``````
+iht = InstanceHardnessThreshold(random_state=42)
+X_res, Y_res = iht.fit_resample(X, Y)
+``````
+``````
+claim_res = pd.DataFrame(Y_res.groupby(["Claim"]).size(), columns=['Frequency'])
+claim_res['Percent'] = round((claim_res['Frequency'] / Y_res.shape[0])*100 , 2)
+claim_res
+``````
+``````
+values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
+results = pd.DataFrame(values[1:],columns=values[0])
+results
+``````
+``````
+sel = SelectFromModel(RandomForestClassifier())
+sel.fit(X_res_train, y_res_train)
+
+sel.get_support()
+``````
 ``````
 
 ``````
-``````
 
-
+## Deep Learning (MLP)
 
