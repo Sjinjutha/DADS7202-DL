@@ -127,6 +127,8 @@ DN = pd.DataFrame(yes.groupby(["Destination"]).size(), columns=['Frequency'])
 DN['Percent'] = round((DN['Frequency'] / n_yes)*100 , 2)
 DN.sort_values('Frequency', ascending=False).head(10)
 ``````
+![Screenshot 2022-09-14 234458](https://user-images.githubusercontent.com/113499057/190226775-95df3c94-4658-48ea-985b-4901782befab.jpg)
+
 Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
 ``````
 # Agency Type : Airlines=1, TravelAgency:0
