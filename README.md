@@ -644,7 +644,7 @@ def round_five_iter(number_seed, verbose_see=1) :
 
     print(f"{'-'*100}")
 ``````
-![Screenshot 2022-09-15 152528](https://user-images.githubusercontent.com/113499057/190374735-b46a4e26-d579-489e-afe7-e5224d4212c4.jpg)
+
 ``````
 ### Round 1
 End in 73 epochs 
@@ -701,6 +701,8 @@ print("SD is :", SD_acc)
 <img width="285" alt="Screenshot 2022-09-15 174717" src="https://user-images.githubusercontent.com/97572167/190385320-27702709-e25e-4c55-a32f-7bc09f2bd1f0.png">
 
 From the results, it was found that MLP gave the highest accuracy = 0.77743±0.0084 and training time = 7ms per epoch.
+
+Note : In general, we will settle model in round 2 to be our model for use-case if we were ruled by accuracy rate.
 
 ## Discussion
 
