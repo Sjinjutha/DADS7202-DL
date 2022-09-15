@@ -532,11 +532,15 @@ for index,col in list(zip(corr.unstack().index.to_list(), corr.unstack().to_list
 
 list_drop
 ``````
+![Screenshot 2022-09-15 152137](https://user-images.githubusercontent.com/113499057/190372104-72b98609-8e99-4ff4-baeb-12c65cd74ba3.jpg)
+
 Drop columns already
 ``````
 new_df.drop(list_drop, axis=1, inplace=True)
 new_df
 ``````
+![Screenshot 2022-09-15 152210](https://user-images.githubusercontent.com/113499057/190372178-cd1ffbbe-4640-4270-a9e1-4e004d2a6e2f.jpg)
+
 Data format: data type : need to be a correct/certain data type
 
 Most DL frameworks use float32 as a default data type
@@ -547,6 +551,7 @@ X_test_1 = X_test_1.astype(np.float32)
 print( f"X_train.shape={X_train_1.shape} , X_train.dtype={X_train_1.dtype} , min(X_train)={np.min(X_train_1)} , max(X_train)={np.max(X_train_1)}" )
 print( f"X_test.shape={X_test_1.shape} , X_test.dtype={X_test_1.dtype} , min(X_test)={np.min(X_test_1)} , max(X_test)={np.max(X_test_1)}" )
 ``````
+![Screenshot 2022-09-15 152241](https://user-images.githubusercontent.com/113499057/190372269-ff3cef47-a0f5-49bb-8e8a-0301a8990fd5.jpg)
 ``````
 input_dim_num = X_train_1.shape[1] # the number of features per one input
 output_dim = 1     # the number of output classes - 1
