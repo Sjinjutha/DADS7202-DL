@@ -278,7 +278,7 @@ grid_search = grid.fit(X_train_selected, y_res_train)
 
 print(grid_search.best_params_)
 ``````
-![Screenshot 2022-09-15 014502](https://user-images.githubusercontent.com/113499057/190237535-03a9ccb3-ad3c-4490-b4e9-67763189c132.jpg)
+![Screenshot 2022-09-15 135457](https://user-images.githubusercontent.com/113499057/190335737-e72dfe12-d5bb-4460-bfa3-1e59822d0bd2.jpg)
 ``````
 rf = RandomForestClassifier(class_weight='balanced', criterion='entropy', max_depth=14, random_state=42)
 
@@ -292,13 +292,13 @@ values = []
 values.append([str(rf)[:10], f1_score(y_res_test,y_selected_pred), roc_auc_score(y_res_test,y_selected_pred), 
                recall_score(y_res_test,y_selected_pred), precision_score(y_res_test,y_selected_pred)])
 ``````
-![Screenshot 2022-09-15 014247](https://user-images.githubusercontent.com/113499057/190237546-9ee75834-e2d6-42be-bf0b-05d70bb4838c.jpg)
+![Screenshot 2022-09-15 135536](https://user-images.githubusercontent.com/113499057/190335766-2ab8fac0-260a-48f6-b470-0ca0cb56fdcf.jpg)
 ``````
 values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_score'])
 results = pd.DataFrame(values[1:], columns=values[0])
 results
 ``````
-![Screenshot 2022-09-15 014200](https://user-images.githubusercontent.com/113499057/190237553-75c658e9-b1c5-4053-bd6b-e40e6b365dae.jpg)
+![Screenshot 2022-09-15 135553](https://user-images.githubusercontent.com/113499057/190335786-365cb191-26a2-4b71-afda-e7a75f691d1f.jpg)
 
 ## Deep Learning (MLP)
 
