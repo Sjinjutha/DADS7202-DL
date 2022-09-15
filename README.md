@@ -599,7 +599,7 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpo
 es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
 ``````
 ![Screenshot 2022-09-15 152459](https://user-images.githubusercontent.com/113499057/190374717-5ffd88ea-c171-4ed2-a67c-5fe469f3515a.jpg)
-``````
+
 Iteration round 1, 2, 3, 4, 5
 ``````
 number_seed = [1234, 123, 12, 42, 1]
@@ -643,40 +643,49 @@ def round_five_iter(number_seed, verbose_see=1) :
     plt.show()
 
     print(f"{'-'*100}")
-
+``````
 ![Screenshot 2022-09-15 152528](https://user-images.githubusercontent.com/113499057/190374735-b46a4e26-d579-489e-afe7-e5224d4212c4.jpg)
-
 ``````
 ### Round 1
 End in 73 epochs 
 ``````
 round_five_iter(1234,1)
+
+![Screenshot 2022-09-15 152828](https://user-images.githubusercontent.com/113499057/190375992-6964e1fc-53b6-4a8a-9620-96e9277cf8cf.jpg)
+
 ``````
 ### Round 2
 End in 88 epochs 
 ``````
 round_five_iter(123, 1)
+
+![Screenshot 2022-09-15 152855](https://user-images.githubusercontent.com/113499057/190375971-e67dace0-bf86-404b-a551-5d7f081bb9fe.jpg)
 ``````
 ### Round 3
 End in 69 epochs 
 ``````
 round_five_iter(12, 0)
+
+![Screenshot 2022-09-15 152931](https://user-images.githubusercontent.com/113499057/190375953-02ee9f39-9ce9-41ae-8f12-38952c1ea6b0.jpg)
 ``````
 ### Round 4
 End in 57 epochs 
 ``````
 round_five_iter(42, 0)
+
+![Screenshot 2022-09-15 153018](https://user-images.githubusercontent.com/113499057/190375926-8962b4c4-0500-4232-8e27-2548138236df.jpg)
 ``````
 ### Round 5
 End in 57 epochs 
 ``````
 round_five_iter(1, 0)
-``````
+
+![Screenshot 2022-09-15 153127](https://user-images.githubusercontent.com/113499057/190375918-9f90e41c-70c6-4046-9dfe-2dc6f765aa02.jpg)
+
 measure accuracy_list
 
 training time per epoch : 7ms 
-``````
-``````
+
 Since round 2 has performed best score, we decided to use model 2
 ``````
 print(f"accuracy_list: {accuracy_list}")
@@ -687,6 +696,7 @@ SD_acc = statistics.stdev(accuracy_list)
 print("Mean is :", mean_acc)
 print("SD is :", SD_acc)
 ``````
+![Screenshot 2022-09-15 153154](https://user-images.githubusercontent.com/113499057/190375896-e100390d-befd-4e55-9975-23e8a8253cc0.jpg)
 
 ## Reference
 [1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
@@ -694,18 +704,6 @@ print("SD is :", SD_acc)
 [2] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
 
 [3] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
-
-[3] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
-
-[4] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
-
-[5] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
-
-[6] 'Classification on imbalanced data' from https://www.tensorflow.org/tutorials/structured_data/imbalanced_data
-
-[7] 'Credit Fraud || Dealing with Imbalanced Datasets' from https://www.kaggle.com/code/janiobachmann/credit-fraud-dealing-with-imbalanced-datasets/notebook
-
-[8] 'Optimizers' from https://keras.io/api/optimizers/
 
 ## End Credit
 งานชิ้นนี้เป็นส่วนหนึ่งของวิชา DADS7202 Deep Learning หลักสูตรวิทยาศาสตร์มหาบัณฑิต คณะสถิติประยุกต์ สถาบันบัณฑิตพัฒนบริหารศาสตร์
