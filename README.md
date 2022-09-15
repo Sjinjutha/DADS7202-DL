@@ -598,7 +598,7 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpo
                                                                 save_best_only=True)
 es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
 ``````
-
+![Screenshot 2022-09-15 152459](https://user-images.githubusercontent.com/113499057/190374717-5ffd88ea-c171-4ed2-a67c-5fe469f3515a.jpg)
 ``````
 Iteration round 1, 2, 3, 4, 5
 ``````
@@ -644,7 +644,7 @@ def round_five_iter(number_seed, verbose_see=1) :
 
     print(f"{'-'*100}")
 ``````
-
+![Screenshot 2022-09-15 152528](https://user-images.githubusercontent.com/113499057/190374735-b46a4e26-d579-489e-afe7-e5224d4212c4.jpg)
 ### Round 1
 End in 73 epochs 
 ``````
