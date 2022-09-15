@@ -53,10 +53,6 @@ print('Percent of missing "Gender" records is %.2f%%' %((df['Gender'].isnull().s
 Percent of missing "Gender" records is 71.23%, so we decide to drop Gender variable.
 ``````
 df = df.drop(['Gender'], axis = 1)
-df.head()
-``````
-![Screenshot 2022-09-14 221513](https://user-images.githubusercontent.com/113499057/190210803-f161ebc2-54a9-49a2-bdc6-65a42d37eca9.jpg)
-``````
 new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Duration','Destination','Net Sales','Commision (in value)','Age','Claim']
 df = df.reindex(columns=new_cols)
 df.head()
