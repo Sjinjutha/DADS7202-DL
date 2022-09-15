@@ -703,6 +703,8 @@ print("SD is :", SD_acc)
 ## Conclusion
 <img width="318" alt="Screenshot 2022-09-15 173931" src="https://user-images.githubusercontent.com/97572167/190383542-274e8291-aa6e-4404-8c86-10b1c7d93dd2.png">
 
+From the results, it was found that MLP gave the highest accuracy = 0.77743±0.0084 and training time = 7ms per epoch.
+
 
 
 ## Reference
