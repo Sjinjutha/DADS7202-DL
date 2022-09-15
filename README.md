@@ -181,6 +181,7 @@ from sklearn.metrics import f1_score, roc_auc_score, recall_score, precision_sco
 from sklearn.feature_selection import SelectFromModel
 ``````
 Remember that our data is imbalanced data. Need to show how difference between doing imbalanced or not.
+
 First, we do an traditional data.
 ``````
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42, stratify=Y)
@@ -205,6 +206,7 @@ results = pd.DataFrame(values[1:], columns=values[0])
 results
 ``````
 ![Screenshot 2022-09-15 003514](https://user-images.githubusercontent.com/113499057/190229948-2f9db5c5-551d-4a4f-ab7a-4e3ddfca9e37.jpg)
+
 Then we do data after imbalanced data.
 ``````
 # Undersampling for imbalanced data
@@ -239,7 +241,11 @@ values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_sc
 results = pd.DataFrame(values[1:],columns=values[0])
 results
 ``````
+Overview of score are better.
+
 ![Screenshot 2022-09-15 012318](https://user-images.githubusercontent.com/113499057/190234521-22191ee6-04b6-4588-b60f-3ae08bd03aa2.jpg)
+
+we need to provide overfitting model by selected variables from RandomForestClassiflier Model
 ``````
 sel = SelectFromModel(RandomForestClassifier())
 sel.fit(X_res_train, y_res_train)
@@ -257,6 +263,8 @@ X_train_selected = X_res_train.loc[:,selected_feat]
 X_test_selected = X_res_test.loc[:,selected_feat]
 ``````
 ![Screenshot 2022-09-15 013634](https://user-images.githubusercontent.com/113499057/190235647-d1cc4775-84df-46c8-a114-62d02470040a.jpg)
+
+Tuning hyperparameter of RandomForestClassier Model
 ``````
 # use GridSerchCV to find the best parameter by exhaustive search over specified parameter values for an estimator.
 
