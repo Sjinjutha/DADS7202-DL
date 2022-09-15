@@ -686,9 +686,8 @@ round_five_iter(1, 0)
 
 measure accuracy_list
 
-training time per epoch : 7ms 
+- training time per epoch : 7ms 
 
-Since round 2 has performed best score, we decided to use model 2
 ``````
 print(f"accuracy_list: {accuracy_list}")
 
