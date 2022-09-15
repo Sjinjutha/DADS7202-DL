@@ -389,7 +389,6 @@ import warnings
 warnings.filterwarnings('ignore')
 pd.set_option("display.max_columns", None)
 ``````
-![Screenshot 2022-09-15 151137](https://user-images.githubusercontent.com/113499057/190356140-45b11da3-a694-4d5a-86fc-e3f678f166d9.jpg)
 ``````
 df['Age'] = df['Age'].astype('int')
 df = pd.get_dummies(df)
