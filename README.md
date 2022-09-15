@@ -448,6 +448,7 @@ for train_index, test_index in sss.split(X_1, y_1):
     
 print(f"\nNew ratio (test:train) : {round(len(original_Xtest) / len(original_Xtrain), 2)}")
 ``````
+![Screenshot 2022-09-15 151347](https://user-images.githubusercontent.com/113499057/190362301-660cc28e-0c82-42ed-95ed-fbf4fbb915ca.jpg)
 ``````
 # Turn into an array
 original_Xtrain = original_Xtrain.values
@@ -463,6 +464,8 @@ print('Label Distributions: \n')
 print(train_counts_label/ len(original_ytrain))
 print(test_counts_label/ len(original_ytest))
 ``````
+![Screenshot 2022-09-15 151410](https://user-images.githubusercontent.com/113499057/190362348-e1997df2-0ece-43b0-98f3-f3a449be06e0.jpg)
+
 Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
 
 
