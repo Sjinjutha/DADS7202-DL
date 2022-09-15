@@ -705,13 +705,15 @@ From the results, it was found that MLP gave the highest accuracy = 0.77743±0.0
 ## Discussion
 
 The main problems that we encountered are
-[1.] Imbalance dataset between y and x variables : As mentioned above, the proportion of y and x is a huge amount which may mislead assemble our model 
+[1] Imbalance dataset between y and x variables : As mentioned above, the proportion of y and x is a huge amount which may mislead assemble our model 
 We take some action as you saw.
-[2.] Unexpectable trial MLP results in fitting step : This problem occured in time of fitting MLP model.
+[2] Unexpectable trial MLP results in fitting step : This problem occured in time of fitting MLP model.
 Even though how effort we spent on fitting, the model are steady. Espectially accuaracy rate.
 We suspected this tremendous results that probably lead in a fake/false way. 
 For example, the giganic accuracy probably gained from predicting almost totally 0 class.(Hardly to predict 1 class in the huge dataset of 0 class)
+
 ![Picture1](https://user-images.githubusercontent.com/50355214/190434878-587c7578-174a-4c1b-a392-a68436ca157a.png)
+
 We decided to try in many kind of method such as 
 altering "learning rate", number of "nodes, layers, epochs, batch size and dropout_rate" 
 However, there are the critical point to fix this problem 3 spots, validation_split ratio, 
