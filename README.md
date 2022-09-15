@@ -660,26 +660,32 @@ def round_five_iter(number_seed, verbose_see=1) :
     print(f"{'-'*100}")
 ``````
 ### Round 1
+End in 73 epochs 
 ``````
 round_five_iter(1234,1)
 ``````
 ### Round 2
+End in 88 epochs 
 ``````
 round_five_iter(123, 1)
 ``````
 ### Round 3
+End in 69 epochs 
 ``````
 round_five_iter(12, 0)
 ``````
 ### Round 4
+End in 57 epochs 
 ``````
 round_five_iter(42, 0)
 ``````
 ### Round 5
+End in 57 epochs 
 ``````
 round_five_iter(1, 0)
 ``````
 measure accuracy_list
+training time per epoch : 7ms 
 ``````
 mean_acc = statistics.mean(accuracy_list)
 SD_acc = statistics.stdev(accuracy_list)
