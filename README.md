@@ -278,7 +278,7 @@ grid_search = grid.fit(X_train_selected, y_res_train)
 
 print(grid_search.best_params_)
 ``````
-![Screenshot 2022-09-15 135457](https://user-images.githubusercontent.com/113499057/190335737-e72dfe12-d5bb-4460-bfa3-1e59822d0bd2.jpg)
+![Screenshot 2022-09-15 145547](https://user-images.githubusercontent.com/113499057/190348161-e58b569b-65b3-4916-ba58-41d01a28e51e.jpg)
 ``````
 rf = RandomForestClassifier(class_weight='balanced', criterion='entropy', max_depth=14, random_state=42)
 
