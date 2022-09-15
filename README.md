@@ -575,7 +575,6 @@ model.compile(optimizer=sgd, loss='binary_crossentropy', metrics=['acc']) # spar
 
 model.summary()
 ``````
-check model.weights
 ``````
 checkpoint_filepath = "bestmodel_epoch{epoch:02d}_valloss{val_loss:.2f}.hdf5"
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpoint_filepath,
@@ -584,7 +583,7 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpo
                                                                 mode='max',
                                                                 save_best_only=True)
 es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
-
+``````
 ``````
 Iteration round 1, 2, 3, 4, 5
 ``````
