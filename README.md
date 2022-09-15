@@ -316,6 +316,7 @@ results
 # List all NVIDIA GPUs as avaialble in this computer (or Colab's session)
 !nvidia-smi -L
 ``````
+![Screenshot 2022-09-15 151038](https://user-images.githubusercontent.com/113499057/190356089-3df9265f-cdaa-447d-bb35-dd90c5a36c19.jpg)
 ``````
 import sys
 print( f"Python {sys.version}\n" )
@@ -337,6 +338,8 @@ print( f"TensorFlow detected { len(gpus) } GPU(s):" )
 for i, gpu in enumerate(gpus):
   print( f".... GPU No. {i}: Name = {gpu.name} , Type = {gpu.device_type}" )
 ``````
+![Screenshot 2022-09-15 151056](https://user-images.githubusercontent.com/113499057/190356115-842b2694-5d00-42ba-8768-2e6485cc01ff.jpg)
+
 Set fixed seeding values for reproducability during experiments
 
 Skip this cell if random initialization (with varied results) is needed
@@ -386,6 +389,7 @@ import warnings
 warnings.filterwarnings('ignore')
 pd.set_option("display.max_columns", None)
 ``````
+![Screenshot 2022-09-15 151137](https://user-images.githubusercontent.com/113499057/190356140-45b11da3-a694-4d5a-86fc-e3f678f166d9.jpg)
 ``````
 df['Age'] = df['Age'].astype('int')
 df = pd.get_dummies(df)
