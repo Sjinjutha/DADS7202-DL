@@ -495,6 +495,8 @@ sns.countplot('Claim', data=new_df, palette=colors)
 plt.title('Equally Distributed Claim', fontsize=14)
 plt.show()
 ``````
+![Screenshot 2022-09-15 151611](https://user-images.githubusercontent.com/113499057/190362838-a5daee33-2287-4f90-a234-0504d1951f9b.jpg)
+
 Correlation matrices 
 
 Make sure we use the subsample in our correlation
@@ -515,6 +517,8 @@ sns.heatmap(sub_sample_corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax2)
 ax2.set_title('SubSample Correlation Matrix \n (use for reference)', fontsize=14)
 plt.show()
 ``````
+![Screenshot 2022-09-15 151723](https://user-images.githubusercontent.com/113499057/190362859-7d0edd24-9a3c-4c09-874f-12a75e8be656.jpg)
+![Screenshot 2022-09-15 151723](https://user-images.githubusercontent.com/113499057/190362859-7d0edd24-9a3c-4c09-874f-12a75e8be656.jpg)
 Eliminate columns which got higher corr > 0.8
 ``````
 list_drop = []
