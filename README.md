@@ -684,11 +684,21 @@ print("SD is :", SD_acc)
 ``````
 
 ## Reference
-[1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
+[1] (2022) 'Neural Feature Importance' from https://towardsdatascience.com/neural-feature-importance-1c1868a4bf53
 
-[2] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
+[2] (2021) 'Tuning the Hyperparameters and Layers of Neural Network Deep Learning' from https://www.analyticsvidhya.com/blog/2021/05/tuning-the-hyperparameters-and-layers-of-neural-network-deep-learning/
 
-[3] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
+[3] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
+
+[4] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
+
+[5] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
+
+[6] 'Classification on imbalanced data' from https://www.tensorflow.org/tutorials/structured_data/imbalanced_data
+
+[7] 'Credit Fraud || Dealing with Imbalanced Datasets' from https://www.kaggle.com/code/janiobachmann/credit-fraud-dealing-with-imbalanced-datasets/notebook
+
+[8] 'Optimizers' from https://keras.io/api/optimizers/
 
 ## End Credit
 งานชิ้นนี้เป็นส่วนหนึ่งของวิชา DADS7202 Deep Learning หลักสูตรวิทยาศาสตร์มหาบัณฑิต คณะสถิติประยุกต์ สถาบันบัณฑิตพัฒนบริหารศาสตร์
