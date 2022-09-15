@@ -448,7 +448,6 @@ for train_index, test_index in sss.split(X_1, y_1):
     
 print(f"\nNew ratio (test:train) : {round(len(original_Xtest) / len(original_Xtrain), 2)}")
 ``````
-![Screenshot 2022-09-15 151347](https://user-images.githubusercontent.com/113499057/190362301-660cc28e-0c82-42ed-95ed-fbf4fbb915ca.jpg)
 ``````
 # Turn into an array
 original_Xtrain = original_Xtrain.values
@@ -464,8 +463,6 @@ print('Label Distributions: \n')
 print(train_counts_label/ len(original_ytrain))
 print(test_counts_label/ len(original_ytest))
 ``````
-![Screenshot 2022-09-15 151410](https://user-images.githubusercontent.com/113499057/190362348-e1997df2-0ece-43b0-98f3-f3a449be06e0.jpg)
-
 Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
 
 
@@ -495,7 +492,13 @@ sns.countplot('Claim', data=new_df, palette=colors)
 plt.title('Equally Distributed Claim', fontsize=14)
 plt.show()
 ``````
+Correlation matrices 
+
 Make sure we use the subsample in our correlation
+
+On the other words, we decided to find features that probably making bias on our data (results for "claim") 
+by examining corelated variables and eliminating those features
+
 ``````
 f, (ax1, ax2) = plt.subplots(2, 1, figsize=(24,20))
 
@@ -687,21 +690,11 @@ print("SD is :", SD_acc)
 ``````
 
 ## Reference
-[1] (2022) 'Neural Feature Importance' from https://towardsdatascience.com/neural-feature-importance-1c1868a4bf53
+[1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
 
-[2] (2021) 'Tuning the Hyperparameters and Layers of Neural Network Deep Learning' from https://www.analyticsvidhya.com/blog/2021/05/tuning-the-hyperparameters-and-layers-of-neural-network-deep-learning/
+[2] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
 
-[3] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
-
-[4] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
-
-[5] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
-
-[6] 'Classification on imbalanced data' from https://www.tensorflow.org/tutorials/structured_data/imbalanced_data
-
-[7] 'Credit Fraud || Dealing with Imbalanced Datasets' from https://www.kaggle.com/code/janiobachmann/credit-fraud-dealing-with-imbalanced-datasets/notebook
-
-[8] 'Optimizers' from https://keras.io/api/optimizers/
+[3] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
 
 ## End Credit
 งานชิ้นนี้เป็นส่วนหนึ่งของวิชา DADS7202 Deep Learning หลักสูตรวิทยาศาสตร์มหาบัณฑิต คณะสถิติประยุกต์ สถาบันบัณฑิตพัฒนบริหารศาสตร์
