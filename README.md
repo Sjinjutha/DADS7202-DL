@@ -180,6 +180,7 @@ from sklearn.metrics import f1_score, roc_auc_score, recall_score, precision_sco
 
 from sklearn.feature_selection import SelectFromModel
 ``````
+Remember that our data is imbalanced data. Need to show how difference between doing imbalanced or not.
 ``````
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42, stratify=Y)
 ``````
