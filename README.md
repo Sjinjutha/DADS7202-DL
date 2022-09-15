@@ -82,7 +82,7 @@ plt.show()
 ``````
 ![Screenshot 2022-09-14 221622](https://user-images.githubusercontent.com/113499057/190212469-5d8fd3ba-56b5-4f22-8165-1fa07c5824ab.jpg)
 
-Reference with normal distribution, we decide to delete data which has age >= 118
+Reference with normal distribution, 99.7 percent of the data is within three standard deviations (σ) of the mean (μ), we decide to delete data which has age >= 118
 ``````
 df['Age'] = np.where(df['Age'] >= df['Age'].quantile(0.997), np.nan, df['Age'])
 df = df.dropna()
