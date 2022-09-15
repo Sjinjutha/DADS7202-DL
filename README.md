@@ -699,21 +699,23 @@ print("SD is :", SD_acc)
 ![Screenshot 2022-09-15 153154](https://user-images.githubusercontent.com/113499057/190375896-e100390d-befd-4e55-9975-23e8a8253cc0.jpg)
 
 ## Reference
-[1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
+[1] (2020) 'Explaining the Empirical Rule for Normal Distribution' from https://builtin.com/data-science/empirical-rule
 
-[2] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
+[2] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
 
-[3] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
+[3] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
 
-[4] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
+[4] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
 
-[5] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
+[5] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
 
-[6] 'Classification on imbalanced data' from https://www.tensorflow.org/tutorials/structured_data/imbalanced_data
+[6] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
 
-[7] 'Credit Fraud || Dealing with Imbalanced Datasets' from https://www.kaggle.com/code/janiobachmann/credit-fraud-dealing-with-imbalanced-datasets/notebook
+[7] 'Classification on imbalanced data' from https://www.tensorflow.org/tutorials/structured_data/imbalanced_data
 
-[8] 'Optimizers' from https://keras.io/api/optimizers/
+[8] 'Credit Fraud || Dealing with Imbalanced Datasets' from https://www.kaggle.com/code/janiobachmann/credit-fraud-dealing-with-imbalanced-datasets/notebook
+
+[9] 'Optimizers' from https://keras.io/api/optimizers/
 
 ## End Credit
 งานชิ้นนี้เป็นส่วนหนึ่งของวิชา DADS7202 Deep Learning หลักสูตรวิทยาศาสตร์มหาบัณฑิต คณะสถิติประยุกต์ สถาบันบัณฑิตพัฒนบริหารศาสตร์
