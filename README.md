@@ -157,6 +157,7 @@ Y = pd.DataFrame(data.loc[:,'Claim'], columns=['Claim'])
 data.drop('Claim', axis=1, inplace=True)
 X = data
 ``````
+Since most variables are dummy variables which has value only 0 and 1, so we did data scaling.
 ``````
 scaler = StandardScaler()
 scaler.fit(X.loc[:,"Duration":"Age"])
@@ -297,7 +298,30 @@ results
 ![Screenshot 2022-09-15 135553](https://user-images.githubusercontent.com/113499057/190335786-365cb191-26a2-4b71-afda-e7a75f691d1f.jpg)
 
 ## Deep Learning (MLP)
+``````
 
+``````
+``````
+
+``````
+``````
+
+``````
+``````
+
+``````
+``````
+
+``````
+``````
+
+``````
+``````
+
+``````
+``````
+
+``````
 ## Reference
 [1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
 
