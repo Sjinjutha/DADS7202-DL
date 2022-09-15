@@ -720,6 +720,7 @@ However, there are the critical point to fix this problem 3 spots, validation_sp
 activation (change to be "softplus") and optimizer(change to be "sgd")
 
 
+
 ## Reference
 [1] (2022) 'Explaining the Empirical Rule for Normal Distribution' from https://builtin.com/data-science/empirical-rule
 
