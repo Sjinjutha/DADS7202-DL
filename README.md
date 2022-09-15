@@ -657,6 +657,7 @@ round_five_iter(1234,1)
 ``````
 ### Round 2
 End in 88 epochs 
+Evaluation between X_test and y_test >> loss & accuracy are below. 
 ``````
 round_five_iter(123, 1)
 
@@ -664,6 +665,7 @@ round_five_iter(123, 1)
 ``````
 ### Round 3
 End in 69 epochs 
+Evaluation between X_test and y_test >> loss & accuracy are below. 
 ``````
 round_five_iter(12, 0)
 
@@ -671,6 +673,7 @@ round_five_iter(12, 0)
 ``````
 ### Round 4
 End in 57 epochs 
+Evaluation between X_test and y_test >> loss & accuracy are below. 
 ``````
 round_five_iter(42, 0)
 
@@ -678,6 +681,7 @@ round_five_iter(42, 0)
 ``````
 ### Round 5
 End in 57 epochs 
+Evaluation between X_test and y_test >> loss & accuracy are below. 
 ``````
 round_five_iter(1, 0)
 
