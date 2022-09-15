@@ -337,9 +337,10 @@ print( f"TensorFlow detected { len(gpus) } GPU(s):" )
 for i, gpu in enumerate(gpus):
   print( f".... GPU No. {i}: Name = {gpu.name} , Type = {gpu.device_type}" )
 ``````
+Set fixed seeding values for reproducability during experiments
+
+Skip this cell if random initialization (with varied results) is needed
 ``````
-# Set fixed seeding values for reproducability during experiments
-# Skip this cell if random initialization (with varied results) is needed
 np.random.seed(1234)
 tf.random.set_seed(5678)
 ``````
@@ -414,9 +415,8 @@ df3 = df
 
 df
 ``````
+Splitting the Data (Original DataFrame)
 ``````
-# Splitting the Data (Original DataFrame)
-
 df1 = df
 
 not_claim = 100 * df1.Claim.value_counts()[0] / len(df)
@@ -457,10 +457,11 @@ print('Label Distributions: \n')
 print(train_counts_label/ len(original_ytrain))
 print(test_counts_label/ len(original_ytest))
 ``````
-``````
-# Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
-# assuming we want a 80/20 ratio but select all y (in term of 30% of total)
+Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
 
+
+Assuming we want a 80/20 ratio but select all y (in term of 30% of total)
+``````
 ratio_want = int((100 / 30) * df.Claim.value_counts()[1]) - int(df.Claim.value_counts()[1])
 
 ## shuffle dataset
@@ -485,9 +486,8 @@ sns.countplot('Claim', data=new_df, palette=colors)
 plt.title('Equally Distributed Claim', fontsize=14)
 plt.show()
 ``````
+Make sure we use the subsample in our correlation
 ``````
-# Make sure we use the subsample in our correlation
-
 f, (ax1, ax2) = plt.subplots(2, 1, figsize=(24,20))
 
 # Entire DataFrame
@@ -500,9 +500,8 @@ sns.heatmap(sub_sample_corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax2)
 ax2.set_title('SubSample Correlation Matrix \n (use for reference)', fontsize=14)
 plt.show()
 ``````
+Eliminate columns which got higher corr > 0.8
 ``````
-# Eliminate columns which got higher corr > 0.8
-
 list_drop = []
 
 for index,col in list(zip(corr.unstack().index.to_list(), corr.unstack().to_list())) :
@@ -514,24 +513,15 @@ for index,col in list(zip(corr.unstack().index.to_list(), corr.unstack().to_list
 
 list_drop
 ``````
+Drop columns already
 ``````
-## drop columns already
 new_df.drop(list_drop, axis=1, inplace=True)
 new_df
 ``````
-``````
-## drop columns already
-new_df.drop(list_drop, axis=1, inplace=True)
-new_df
+Data format: data type : need to be a correct/certain data type
 
-## drop columns already
-new_df.drop(list_drop, axis=1, inplace=True)
-new_df
+Most DL frameworks use float32 as a default data type
 ``````
-``````
-# Data format: data type : need to be a correct/certain data type
-# Most DL frameworks use float32 as a default data type
-
 X_train_1 = X_train_1.astype(np.float32)
 X_test_1 = X_test_1.astype(np.float32)
 
@@ -586,8 +576,8 @@ es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience
 model_hist_1 = model.fit(X_train_1, y_train_1, batch_size=128, epochs=EPOCHS, verbose=1, 
                       validation_split=0.3, callbacks=[es_1])
 ``````
+Summarize history for accuracy
 ``````
-# Summarize history for accuracy
 plt.figure(figsize=(15,5))
 plt.plot(model_hist_1.history['acc'])
 plt.plot(model_hist_1.history['val_acc'])
@@ -597,8 +587,9 @@ plt.xlabel('epoch')
 plt.legend(['train', 'val'], loc='upper left')
 plt.grid()
 plt.show()
-
-# Summarize history for loss
+``````
+Summarize history for loss
+``````
 plt.figure(figsize=(15,5))
 plt.plot(model_hist_1.history['loss'])
 plt.plot(model_hist_1.history['val_loss'])
@@ -614,9 +605,8 @@ y_pred_1 = model.predict(X_test_1, batch_size=256, verbose=1, callbacks=[es_1] )
 results_1 = model.evaluate(X_test_1, y_test_1)
 print( f"{model.metrics_names} = {results_1}" )
 ``````
+Iteration round 1, 2, 3, 4, 5
 ``````
-# Iteration round 1, 2, 3, 4, 5
-
 number_seed = [1234, 123, 12, 42, 1]
 accuracy_list = []
 
@@ -658,29 +648,28 @@ def round_five_iter(number_seed, verbose_see=1) :
 
     print(f"{'-'*100}")
 ``````
+### Round 1
 ``````
-## Round 1
 round_five_iter(1234,1)
 ``````
+### Round 2
 ``````
-## Round 2
 round_five_iter(123, 1)
 ``````
+### Round 3
 ``````
-## Round 3
 round_five_iter(12, 0)
 ``````
+### Round 4
 ``````
-## Round 4
 round_five_iter(42, 0)
 ``````
+### Round 5
 ``````
-## Round 5
 round_five_iter(1, 0)
 ``````
+measure accuracy_list
 ``````
-# measure accuracy_list
-
 mean_acc = statistics.mean(accuracy_list)
 SD_acc = statistics.stdev(accuracy_list)
  
