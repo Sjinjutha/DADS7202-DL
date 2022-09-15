@@ -310,29 +310,381 @@ results
 
 ## Deep Learning (MLP)
 ``````
+# List all NVIDIA GPUs as avaialble in this computer (or Colab's session)
+!nvidia-smi -L
+``````
+``````
+import sys
+print( f"Python {sys.version}\n" )
 
+## if we have pandas, need to convert data to be numpy
+import numpy as np 
+print( f"NumPy {np.__version__}\n" )
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+import tensorflow as tf
+print( f"TensorFlow {tf.__version__}" )
+print( f"tf.keras.backend.image_data_format() = {tf.keras.backend.image_data_format()}" )
+
+# Count the number of GPUs as detected by tensorflow : tensorflow certainly make sure to see GPUs (tensorflow will run on GPUs)
+gpus = tf.config.list_physical_devices('GPU')
+print( f"TensorFlow detected { len(gpus) } GPU(s):" )
+for i, gpu in enumerate(gpus):
+  print( f".... GPU No. {i}: Name = {gpu.name} , Type = {gpu.device_type}" )
 ``````
+``````
+# Set fixed seeding values for reproducability during experiments
+# Skip this cell if random initialization (with varied results) is needed
+np.random.seed(1234)
+tf.random.set_seed(5678)
+``````
+``````
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+import tensorflow as tf
+from tensorflow import keras
+
+from sklearn.feature_selection import RFE, VarianceThreshold
+from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold, StratifiedShuffleSplit
+from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.metrics import make_scorer, accuracy_score
+
+from keras.models import Sequential
+from keras.layers import Dense, BatchNormalization, Dropout, LeakyReLU
+from tensorflow.keras.optimizers import Adam, SGD, RMSprop, Adadelta, Adagrad, Adamax, Nadam, Ftrl
+from keras.callbacks import EarlyStopping, ModelCheckpoint
+from keras.wrappers.scikit_learn import KerasClassifier
+
+from math import floor
+import statistics
+from sklearn.metrics import make_scorer, accuracy_score
+
+from imblearn.under_sampling import InstanceHardnessThreshold
+
+from tensorflow.keras.optimizers import Adam, SGD, RMSprop, Adadelta, Adagrad, Adamax, Nadam, Ftrl
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+from tensorflow.keras.wrappers.scikit_learn import KerasClassifier
+from tensorflow.keras.layers import Dense, BatchNormalization, Dropout, LeakyReLU, Input
+!pip install bayesian-optimization
+from bayes_opt import BayesianOptimization
+
+#!pip install scikeras
+#from scikeras.wrappers import KerasRegressor, KerasClassifier 
+#warnings.filterwarnings('ignore')
+#pd.set_option("display.max_columns", None)
+
+import warnings
+warnings.filterwarnings('ignore')
+pd.set_option("display.max_columns", None)
+``````
+``````
+df['Age'] = df['Age'].astype('int')
+df = pd.get_dummies(df)
+
+# Re-scale 
+col_rescale = ['Duration', 'Net Sales', 'Commision (in value)',  'Age']
+rob_scale = RobustScaler() #StandardScaler() 
+
+for i in col_rescale :
+    for j in  df.columns :
+        if i == j :
+            # RobustScaler is less prone to outliers.
+            df[i+'_rescaled'] = rob_scale.fit_transform(df[i].values.reshape(-1,1))
+            
+drop_col = ["Unnamed: 0"] + col_rescale
+
+# Drop and adjust columns
+df.drop(drop_col, axis=1, inplace=True)
+
+for i in df.columns[-4:] :
+    mv = df.pop(i)
+    df.insert(len(df.columns[-4:]), i, mv, allow_duplicates=False)
+
+df.insert(0, "Claim", df.pop("Claim"))
+
+df3 = df
+
+df
+``````
+``````
+# Splitting the Data (Original DataFrame)
+
+df1 = df
+
+not_claim = 100 * df1.Claim.value_counts()[0] / len(df)
+claim_ =    100 * df1.Claim.value_counts()[1] / len(df)
+print(f"The one who got 'NOT claim' : {round(not_claim, 2)} % of the dataset.")
+print(f"The one who got 'claim'     : {round(claim_, 2)} % of the dataset.")
+print(f"Old ratio (test:train) : {round((claim_ / not_claim), 2)}\n")
+
+# Set fixed seeding values for reproducability during experiments
+# Skip this cell if random initialization (with varied results) is needed
+np.random.seed(1234)
+tf.random.set_seed(5678)
+
+X_1 = df1.drop('Claim', axis=1)
+y_1 = df1['Claim']
+
+sss = StratifiedKFold(n_splits=5, random_state=None, shuffle=False)
+
+for train_index, test_index in sss.split(X_1, y_1):
+    print("Train:", train_index, "Test:", test_index)
+    original_Xtrain, original_Xtest = X_1.iloc[train_index], X_1.iloc[test_index]
+    original_ytrain, original_ytest = y_1.iloc[train_index], y_1.iloc[test_index]
+    
+print(f"\nNew ratio (test:train) : {round(len(original_Xtest) / len(original_Xtrain), 2)}")
+``````
+``````
+# Turn into an array
+original_Xtrain = original_Xtrain.values
+original_Xtest = original_Xtest.values
+original_ytrain = original_ytrain.values
+original_ytest = original_ytest.values
+
+# See if both the train and test label distribution are similarly distributed
+train_unique_label, train_counts_label = np.unique(original_ytrain, return_counts=True)
+test_unique_label, test_counts_label = np.unique(original_ytest, return_counts=True)
+print('-' * 100)
+print('Label Distributions: \n')
+print(train_counts_label/ len(original_ytrain))
+print(test_counts_label/ len(original_ytest))
+``````
+``````
+# Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
+# assuming we want a 80/20 ratio but select all y (in term of 30% of total)
+
+ratio_want = int((100 / 30) * df.Claim.value_counts()[1]) - int(df.Claim.value_counts()[1])
+
+## shuffle dataset
+df_1 = df1.sample(frac=1)
+
+claim_df = df_1.loc[df["Claim"] == 1]
+not_claim_df = df_1.loc[df["Claim"] == 0][ : ratio_want]
+
+normal_distributed_df = pd.concat([claim_df, not_claim_df])
+
+# Shuffle dataframe rows
+new_df = normal_distributed_df.sample(frac=1, random_state=42)
+
+new_df
+``````
+``````
+print("Distribution of 'Claim' in the subsample dataset")
+print(round(new_df['Claim'].value_counts()/len(new_df),2))
+
+colors = ['red', 'blue']
+sns.countplot('Claim', data=new_df, palette=colors)
+plt.title('Equally Distributed Claim', fontsize=14)
+plt.show()
+``````
+``````
+# Make sure we use the subsample in our correlation
+
+f, (ax1, ax2) = plt.subplots(2, 1, figsize=(24,20))
+
+# Entire DataFrame
+corr = df1.corr()
+sns.heatmap(corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax1)
+ax1.set_title("Imbalanced Correlation Matrix \n (don't use for reference)", fontsize=14)
+
+sub_sample_corr = new_df.corr()
+sns.heatmap(sub_sample_corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax2)
+ax2.set_title('SubSample Correlation Matrix \n (use for reference)', fontsize=14)
+plt.show()
+``````
+``````
+# Eliminate columns which got higher corr > 0.8
+
+list_drop = []
+
+for index,col in list(zip(corr.unstack().index.to_list(), corr.unstack().to_list())) :
+    if (index[0] != index[1]) and (col > abs(0.80)):
+        print(index, col)
+        
+        if (index[1] not in list_drop) and (index[0] not in list_drop) :
+            list_drop.append(index[1])
+
+list_drop
+``````
+``````
+## drop columns already
+new_df.drop(list_drop, axis=1, inplace=True)
+new_df
+``````
+``````
+## drop columns already
+new_df.drop(list_drop, axis=1, inplace=True)
+new_df
+
+## drop columns already
+new_df.drop(list_drop, axis=1, inplace=True)
+new_df
+``````
+``````
+# Data format: data type : need to be a correct/certain data type
+# Most DL frameworks use float32 as a default data type
+
+X_train_1 = X_train_1.astype(np.float32)
+X_test_1 = X_test_1.astype(np.float32)
+
+print( f"X_train.shape={X_train_1.shape} , X_train.dtype={X_train_1.dtype} , min(X_train)={np.min(X_train_1)} , max(X_train)={np.max(X_train_1)}" )
+print( f"X_test.shape={X_test_1.shape} , X_test.dtype={X_test_1.dtype} , min(X_test)={np.min(X_test_1)} , max(X_test)={np.max(X_test_1)}" )
+``````
+``````
+input_dim_num = X_train_1.shape[1] # the number of features per one input
+output_dim = 1     # the number of output classes - 1
+EPOCHS = 500
+BATCH_SIZE = 128
+patience_me = 32
+learning_rate = 0.5
+decay_rate = 5e-6
+
+# Sequential model
+model = tf.keras.models.Sequential()
+
+# Input layer
+model.add(Input(shape=(input_dim_num,)))
+# Hidden layer
+model.add(Dense(32, activation='softplus', name='hidden1'))
+model.add(BatchNormalization(axis=-1, name='bn1'))
+model.add(Dense(64, activation='softplus', name='hidden2'))
+model.add(BatchNormalization(axis=-1, name='bn2'))
+model.add(Dense(32, activation='softplus', name='hidden3'))
+model.add(Dropout(0.3)) # drop rate = 30%
+# Output layer
+model.add(Dense(output_dim, activation='softplus', name='output'))
+
+# Compile with default values for both optimizer and loss
+sgd = SGD(learning_rate=learning_rate, decay=decay_rate)
+adam = Adam(learning_rate=learning_rate)
+
+model.compile(optimizer=sgd, loss='binary_crossentropy', metrics=['acc']) # sparse_categorical_crossentropy
+
+## OR 
+# model.compile( optimizer=tf.keras.optimizers.Adam(learning_rate=0.001) , 
+               # loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False) , metrics=['acc'] )
+
+model.summary()
+``````
+check model.weights
+``````
+checkpoint_filepath = "bestmodel_epoch{epoch:02d}_valloss{val_loss:.2f}.hdf5"
+model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpoint_filepath,
+                                                                save_weights_only=True,
+                                                                monitor='val_acc',
+                                                                mode='max',
+                                                                save_best_only=True)
+es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
+model_hist_1 = model.fit(X_train_1, y_train_1, batch_size=128, epochs=EPOCHS, verbose=1, 
+                      validation_split=0.3, callbacks=[es_1])
+``````
+``````
+# Summarize history for accuracy
+plt.figure(figsize=(15,5))
+plt.plot(model_hist_1.history['acc'])
+plt.plot(model_hist_1.history['val_acc'])
+plt.title('Train accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'val'], loc='upper left')
+plt.grid()
+plt.show()
+
+# Summarize history for loss
+plt.figure(figsize=(15,5))
+plt.plot(model_hist_1.history['loss'])
+plt.plot(model_hist_1.history['val_loss'])
+plt.title('Train loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'val'], loc='upper right')
+plt.grid()
+plt.show()
+``````
+``````
+y_pred_1 = model.predict(X_test_1, batch_size=256, verbose=1, callbacks=[es_1] )
+results_1 = model.evaluate(X_test_1, y_test_1)
+print( f"{model.metrics_names} = {results_1}" )
+``````
+``````
+# Iteration round 1, 2, 3, 4, 5
+
+number_seed = [1234, 123, 12, 42, 1]
+accuracy_list = []
+
+def round_five_iter(number_seed, verbose_see=1) :
+    np.random.seed(i)
+    tf.random.set_seed(i)
+    print(f"This is a round {i+1}")
+
+    model_hist_1 = model.fit(X_train_1, y_train_1, batch_size=128, epochs=EPOCHS, verbose=1, 
+                        validation_split=0.3, callbacks=[es_1])
+    
+    y_pred_1 = model.predict(X_test_1, batch_size=256, verbose=verbose_see, callbacks=[es_1] )
+    results_1 = model.evaluate(X_test_1, y_test_1)
+    print( f"round {i+1}: {model.metrics_names} = {results_1}" )
+
+    accuracy_list.append(results_1[1])
+
+    # Summarize history for accuracy
+    plt.figure(figsize=(15,5))
+    plt.plot(model_hist_1.history['acc'])
+    plt.plot(model_hist_1.history['val_acc'])
+    plt.title('Train accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'val'], loc='upper left')
+    plt.grid()
+    plt.show()
+
+    # Summarize history for loss
+    plt.figure(figsize=(15,5))
+    plt.plot(model_hist_1.history['loss'])
+    plt.plot(model_hist_1.history['val_loss'])
+    plt.title('Train loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'val'], loc='upper right')
+    plt.grid()
+    plt.show()
+
+    print(f"{'-'*100}")
+``````
+``````
+## Round 1
+round_five_iter(1234,1)
+``````
+``````
+## Round 2
+round_five_iter(123, 1)
+``````
+``````
+## Round 3
+round_five_iter(12, 0)
+``````
+``````
+## Round 4
+round_five_iter(42, 0)
+``````
+``````
+## Round 5
+round_five_iter(1, 0)
+``````
+``````
+# measure accuracy_list
+
+mean_acc = statistics.mean(accuracy_list)
+SD_acc = statistics.stdev(accuracy_list)
+ 
+print("Mean is :", mean_acc)
+print("SD is :", SD_acc)
 ``````
 
-``````
-``````
-
-``````
-``````
-
-``````
-``````
-
-``````
-``````
-
-``````
-``````
-
-``````
-``````
-
-``````
 ## Reference
 [1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
 
