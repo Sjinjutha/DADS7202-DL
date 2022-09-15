@@ -588,6 +588,7 @@ model.compile(optimizer=sgd, loss='binary_crossentropy', metrics=['acc']) # spar
 
 model.summary()
 ``````
+![Screenshot 2022-09-15 152423](https://user-images.githubusercontent.com/113499057/190373268-c1805e49-f38a-4f55-bc17-405e27d5e014.jpg)
 ``````
 checkpoint_filepath = "bestmodel_epoch{epoch:02d}_valloss{val_loss:.2f}.hdf5"
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpoint_filepath,
@@ -597,6 +598,7 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpo
                                                                 save_best_only=True)
 es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
 ``````
+
 ``````
 Iteration round 1, 2, 3, 4, 5
 ``````
@@ -627,6 +629,7 @@ def round_five_iter(number_seed, verbose_see=1) :
     plt.legend(['train', 'val'], loc='upper left')
     plt.grid()
     plt.show()
+   
 
     # Summarize history for loss
     plt.figure(figsize=(15,5))
@@ -641,6 +644,7 @@ def round_five_iter(number_seed, verbose_see=1) :
 
     print(f"{'-'*100}")
 ``````
+
 ### Round 1
 End in 73 epochs 
 ``````
