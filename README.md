@@ -304,14 +304,12 @@ results
 
 ## Reference
 [1] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
+
 [2] (2018) 'Feature Selection Using Random' from forest https://towardsdatascience.com/feature-selection-using-random-forest-26d7b747597f
+
 [3] (2018) 'Hyperparameter Tuning the Random' Forest in Python from https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74
 
 ## End Credit
 งานชิ้นนี้เป็นส่วนหนึ่งของวิชา DADS7202 Deep Learning หลักสูตรวิทยาศาสตร์มหาบัณฑิต คณะสถิติประยุกต์ สถาบันบัณฑิตพัฒนบริหารศาสตร์
 
-กลุ่ม สู้ DL แต่ DL สู้กลับ
-สมาชิก   1. 64xxxxxx03
-        2. 64xxxxxx06
-        3. 64xxxxxx13
-        4. 64xxxxxx20
+กลุ่ม สู้ DL แต่ DL สู้กลับ สมาชิก: (1) 64xxxxxx03 (2) 64xxxxxx06 (3) 64xxxxxx13 (4) 64xxxxxx20
