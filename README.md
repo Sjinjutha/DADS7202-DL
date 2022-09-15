@@ -278,9 +278,10 @@ grid_search = grid.fit(X_train_selected, y_res_train)
 
 print(grid_search.best_params_)
 ``````
-![Screenshot 2022-09-15 135030](https://user-images.githubusercontent.com/113499057/190334904-902941dd-5f19-4534-9e79-74328166ba90.jpg)
+![Screenshot 2022-09-15 014502](https://user-images.githubusercontent.com/113499057/190237535-03a9ccb3-ad3c-4490-b4e9-67763189c132.jpg)
 ``````
-rf = RandomForestClassifier(random_state=42)
+rf = RandomForestClassifier(class_weight='balanced', criterion='entropy', max_depth=14, random_state=42)
+
 rf.fit(X_train_selected, y_res_train)
 y_selected_pred = rf.predict(X_test_selected)
   
@@ -300,4 +301,6 @@ results
 ![Screenshot 2022-09-15 014200](https://user-images.githubusercontent.com/113499057/190237553-75c658e9-b1c5-4053-bd6b-e40e6b365dae.jpg)
 
 ## Deep Learning (MLP)
+
+## Reference
 
