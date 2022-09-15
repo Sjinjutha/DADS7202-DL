@@ -1,34 +1,34 @@
 # DADS7202-Deep Learning Hw01
 
 # INTRODUCTION
-> As a consurance company, managing risk of product launching is a core of business. In this experiment we explored third-party travel insurance data based in Singapore, Using binary classification model with target attribute Claim status(Yes or No). Details shown below will lead you to know more about dataset, methodology and experimentation result.
+As a consurance company, managing risk of product launching is a core of business. In this experiment we explored third-party travel insurance data based in Singapore, Using binary classification model with target attribute Claim status(Yes or No). Details shown below will lead you to know more about dataset, methodology and experimentation result.
 
 ## About Dataset
->A third-party travel insurance servicing company that is based in Singapore.
+A third-party travel insurance servicing company that is based in Singapore.
 
->The attributes:
+The attributes:
 
->1. Target: Claim Status (Claim.Status)
->2. Name of agency (Agency)
->3. Type of travel insurance agencies (Agency.Type)
->4. Distribution channel of travel insurance agencies (Distribution.Channel)
->5. Name of the travel insurance products (Product.Name)
->6. Duration of travel (Duration)
->7. Destination of travel (Destination)
->8. Amount of sales of travel insurance policies (Net.Sales)
->9. Commission received for travel insurance agency (Commission)
->10. Gender of insured (Gender)
->11. Age of insured (Age)
+1. Target: Claim Status (Claim.Status)
+2. Name of agency (Agency)
+3. Type of travel insurance agencies (Agency.Type)
+4. Distribution channel of travel insurance agencies (Distribution.Channel)
+5. Name of the travel insurance products (Product.Name)
+6. Duration of travel (Duration)
+7. Destination of travel (Destination)
+8. Amount of sales of travel insurance policies (Net.Sales)
+9. Commission received for travel insurance agency (Commission)
+10. Gender of insured (Gender)
+11. Age of insured (Age)
 
 ## Data Preparing
 
->Import library
+Import library
 ```
 import pandas as np
 import numpy as np
 import matplotlib.pyplot as plt
 ```
->Download dataset to your google drive and mount it.
+Download dataset to your google drive and mount it.
 ```
 from google.colab import drive
 drive.mount('/content/drive')
@@ -36,7 +36,7 @@ df = pd.read_csv("/content/drive/MyDrive/travel_insurance.csv")
 df.head()
 ``````
 ![messageImage_1663155344482](https://user-images.githubusercontent.com/113499057/190196116-fd964dcc-7588-4966-9010-068cbc39cebe.jpg)
->Check data information & missing value
+Check data information & missing value
 ``````
 df.info()
 ``````
@@ -53,7 +53,7 @@ print('Percent of missing "Gender" records is %.2f%%' %((df['Gender'].isnull().s
 ``````
 ![Screenshot 2022-09-14 215708](https://user-images.githubusercontent.com/113499057/190197245-cd2c984d-8c7b-4634-b6e6-652e1273f797.jpg)
 
->Percent of missing "Gender" records is 71.23%, so we decide to drop Gender variable.
+Percent of missing "Gender" records is 71.23%, so we decide to drop Gender variable.
 ``````
 df = df.drop(['Gender'], axis = 1)
 new_cols = ['Agency','Agency Type','Distribution Channel','Product Name','Duration','Destination','Net Sales','Commision (in value)','Age','Claim']
@@ -61,7 +61,7 @@ df = df.reindex(columns=new_cols)
 df.head()
 ``````
 ![Screenshot 2022-09-14 221530](https://user-images.githubusercontent.com/113499057/190211071-65a4cde0-b810-441f-a6d8-83e1970d0dff.jpg)
->Check number of data per binary classification (Cliam: Yes,No). There is imbalanced dataset.
+Check number of data per binary classification (Cliam: Yes,No). There is imbalanced dataset.
 ``````
 claim = pd.DataFrame(df.groupby(["Claim"]).size(), columns=['Frequency'])
 claim['Percent'] = round((claim['Frequency'] / n)*100 , 2)
@@ -69,7 +69,7 @@ claim
 ``````
 ![Screenshot 2022-09-14 221557](https://user-images.githubusercontent.com/113499057/190211624-cb257fbc-e3a5-43e1-b5d0-debe8e9f703f.jpg)
 
->Even though Age variable does not has missing value but it has outlier.
+Even though Age variable does not has missing value but it has outlier.
 ``````
 figure_age = plt.figure(figsize = (10, 5))
 plt.hist(df['Age'])
@@ -80,7 +80,7 @@ plt.show()
 ``````
 ![Screenshot 2022-09-14 221622](https://user-images.githubusercontent.com/113499057/190212469-5d8fd3ba-56b5-4f22-8165-1fa07c5824ab.jpg)
 
->Reference with normal distribution, we decide to delete data which has age >= 118
+Reference with normal distribution, we decide to delete data which has age >= 118
 ``````
 df['Age'] = np.where(df['Age'] >= df['Age'].quantile(0.997), np.nan, df['Age'])
 df = df.dropna()
@@ -99,7 +99,7 @@ print(f"After dropped some data : {n} rows and {m} columns.")
 ``````
 ![Screenshot 2022-09-14 234158](https://user-images.githubusercontent.com/113499057/190225773-0e458d58-4797-4f6a-a4ad-3ce1d82421c1.jpg)
 
->Check unique element in qualitative variables
+Check unique element in qualitative variables
 ``````
 column_keys=df.select_dtypes(include=['object']).columns.tolist()
 for key in column_keys:
@@ -117,7 +117,7 @@ A
 ``````
 ![Screenshot 2022-09-14 234458](https://user-images.githubusercontent.com/113499057/190226775-95df3c94-4658-48ea-985b-4901782befab.jpg)
 
->Explore target variable because our data is imbalanced data.
+Explore target variable because our data is imbalanced data.
 ``````
 yes = df[df.Claim == 'Yes']
 n_yes = yes.shape[0]
@@ -128,7 +128,7 @@ DN.sort_values('Frequency', ascending=False).head(10)
 ``````
 ![Screenshot 2022-09-14 234329](https://user-images.githubusercontent.com/113499057/190226623-d260b3b7-46af-490c-bc28-362bf1c5bacf.jpg)
 
->Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
+Change data from nominal to ratio and add new variable because we see that data which precent of destination which is Singapore is 61.29%.
 ``````
 # Agency Type : Airlines=1, TravelAgency:0
 df["Agency Type"] = np.where((df["Agency Type"] == 'Airlines'), 1,0)
@@ -160,7 +160,7 @@ Y = pd.DataFrame(data.loc[:,'Claim'], columns=['Claim'])
 data.drop('Claim', axis=1, inplace=True)
 X = data
 ``````
->Since most variables are dummy variables which has value only 0 and 1, so we did data scaling.
+Since most variables are dummy variables which has value only 0 and 1, so we did data scaling.
 ``````
 scaler = StandardScaler()
 scaler.fit(X.loc[:,"Duration":"Age"])
@@ -183,9 +183,9 @@ from sklearn.metrics import f1_score, roc_auc_score, recall_score, precision_sco
 
 from sklearn.feature_selection import SelectFromModel
 ``````
->Remember that our data is imbalanced data. Need to show how difference between doing imbalanced or not.
+Remember that our data is imbalanced data. Need to show how difference between doing imbalanced or not.
 
->First, we do an traditional data.
+First, we do an traditional data.
 ``````
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42, stratify=Y)
 ``````
@@ -210,7 +210,7 @@ results
 ``````
 ![Screenshot 2022-09-15 003514](https://user-images.githubusercontent.com/113499057/190229948-2f9db5c5-551d-4a4f-ab7a-4e3ddfca9e37.jpg)
 
->Then we do data after imbalanced data.
+Then we do data after imbalanced data.
 ``````
 # Undersampling for imbalanced data
 iht = InstanceHardnessThreshold(random_state=42)
@@ -244,11 +244,11 @@ values.insert(0,['Model','f1_score','roc_auc_score','recall_score','precision_sc
 results = pd.DataFrame(values[1:],columns=values[0])
 results
 ``````
->Overview of score are better.
+Overview of score are better.
 
 ![Screenshot 2022-09-15 012318](https://user-images.githubusercontent.com/113499057/190234521-22191ee6-04b6-4588-b60f-3ae08bd03aa2.jpg)
 
->we need to provide overfitting model by selected variables from RandomForestClassiflier Model
+we need to provide overfitting model by selected variables from RandomForestClassiflier Model
 ``````
 sel = SelectFromModel(RandomForestClassifier())
 sel.fit(X_res_train, y_res_train)
@@ -267,7 +267,7 @@ X_test_selected = X_res_test.loc[:,selected_feat]
 ``````
 ![Screenshot 2022-09-15 013634](https://user-images.githubusercontent.com/113499057/190235647-d1cc4775-84df-46c8-a114-62d02470040a.jpg)
 
->Tuning hyperparameter of RandomForestClassier Model
+Tuning hyperparameter of RandomForestClassier Model
 ``````
 # use GridSerchCV to find the best parameter by exhaustive search over specified parameter values for an estimator.
 
@@ -340,9 +340,9 @@ for i, gpu in enumerate(gpus):
 ``````
 ![Screenshot 2022-09-15 151056](https://user-images.githubusercontent.com/113499057/190356115-842b2694-5d00-42ba-8768-2e6485cc01ff.jpg)
 
->Set fixed seeding values for reproducability during experiments
+Set fixed seeding values for reproducability during experiments
 
->Skip this cell if random initialization (with varied results) is needed
+Skip this cell if random initialization (with varied results) is needed
 ``````
 np.random.seed(1234)
 tf.random.set_seed(5678)
@@ -389,7 +389,6 @@ import warnings
 warnings.filterwarnings('ignore')
 pd.set_option("display.max_columns", None)
 ``````
-![Screenshot 2022-09-15 151137](https://user-images.githubusercontent.com/113499057/190356140-45b11da3-a694-4d5a-86fc-e3f678f166d9.jpg)
 ``````
 df['Age'] = df['Age'].astype('int')
 df = pd.get_dummies(df)
@@ -421,7 +420,7 @@ df
 ``````
 ![Screenshot 2022-09-15 151319](https://user-images.githubusercontent.com/113499057/190356181-32a32dd1-5b5c-4cc9-892c-f9c2a7133ecf.jpg)
 
->Splitting the Data (Original DataFrame)
+Splitting the Data (Original DataFrame)
 ``````
 df1 = df
 
@@ -448,6 +447,7 @@ for train_index, test_index in sss.split(X_1, y_1):
     
 print(f"\nNew ratio (test:train) : {round(len(original_Xtest) / len(original_Xtrain), 2)}")
 ``````
+![Screenshot 2022-09-15 151347](https://user-images.githubusercontent.com/113499057/190363922-043cb2dc-b8ca-42ed-b170-48df9cf38c7f.jpg)
 ``````
 # Turn into an array
 original_Xtrain = original_Xtrain.values
@@ -463,10 +463,12 @@ print('Label Distributions: \n')
 print(train_counts_label/ len(original_ytrain))
 print(test_counts_label/ len(original_ytest))
 ``````
->Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
+![Screenshot 2022-09-15 151410](https://user-images.githubusercontent.com/113499057/190363951-b0d3e84e-23cd-4a92-902e-7e0e39055e6a.jpg)
+
+Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
 
 
->Assuming we want a 80/20 ratio but select all y (in term of 30% of total)
+Assuming we want a 80/20 ratio but select all y (in term of 30% of total)
 ``````
 ratio_want = int((100 / 30) * df.Claim.value_counts()[1]) - int(df.Claim.value_counts()[1])
 
@@ -483,6 +485,7 @@ new_df = normal_distributed_df.sample(frac=1, random_state=42)
 
 new_df
 ``````
+![Screenshot 2022-09-15 151438](https://user-images.githubusercontent.com/113499057/190363976-0beaf84b-f97d-4d73-b839-8c2778dc63c9.jpg)
 ``````
 print("Distribution of 'Claim' in the subsample dataset")
 print(round(new_df['Claim'].value_counts()/len(new_df),2))
@@ -492,11 +495,11 @@ sns.countplot('Claim', data=new_df, palette=colors)
 plt.title('Equally Distributed Claim', fontsize=14)
 plt.show()
 ``````
->Correlation matrices 
+Correlation matrices 
 
->Make sure we use the subsample in our correlation
+Make sure we use the subsample in our correlation
 
->On the other words, we decided to find features that probably making bias on our data (results for "claim") 
+On the other words, we decided to find features that probably making bias on our data (results for "claim") 
 by examining corelated variables and eliminating those features
 
 ``````
@@ -512,7 +515,7 @@ sns.heatmap(sub_sample_corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax2)
 ax2.set_title('SubSample Correlation Matrix \n (use for reference)', fontsize=14)
 plt.show()
 ``````
->Eliminate columns which got higher corr > 0.8
+Eliminate columns which got higher corr > 0.8
 ``````
 list_drop = []
 
@@ -525,14 +528,14 @@ for index,col in list(zip(corr.unstack().index.to_list(), corr.unstack().to_list
 
 list_drop
 ``````
->Drop columns already
+Drop columns already
 ``````
 new_df.drop(list_drop, axis=1, inplace=True)
 new_df
 ``````
->Data format: data type : need to be a correct/certain data type
+Data format: data type : need to be a correct/certain data type
 
->Most DL frameworks use float32 as a default data type
+Most DL frameworks use float32 as a default data type
 ``````
 X_train_1 = X_train_1.astype(np.float32)
 X_test_1 = X_test_1.astype(np.float32)
@@ -576,7 +579,7 @@ model.compile(optimizer=sgd, loss='binary_crossentropy', metrics=['acc']) # spar
 
 model.summary()
 ``````
->check model.weights
+check model.weights
 ``````
 checkpoint_filepath = "bestmodel_epoch{epoch:02d}_valloss{val_loss:.2f}.hdf5"
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpoint_filepath,
@@ -588,7 +591,7 @@ es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience
 model_hist_1 = model.fit(X_train_1, y_train_1, batch_size=128, epochs=EPOCHS, verbose=1, 
                       validation_split=0.3, callbacks=[es_1])
 ``````
->Summarize history for accuracy
+Summarize history for accuracy
 ``````
 plt.figure(figsize=(15,5))
 plt.plot(model_hist_1.history['acc'])
@@ -600,7 +603,7 @@ plt.legend(['train', 'val'], loc='upper left')
 plt.grid()
 plt.show()
 ``````
->Summarize history for loss
+Summarize history for loss
 ``````
 plt.figure(figsize=(15,5))
 plt.plot(model_hist_1.history['loss'])
@@ -617,7 +620,7 @@ y_pred_1 = model.predict(X_test_1, batch_size=256, verbose=1, callbacks=[es_1] )
 results_1 = model.evaluate(X_test_1, y_test_1)
 print( f"{model.metrics_names} = {results_1}" )
 ``````
->Iteration round 1, 2, 3, 4, 5
+Iteration round 1, 2, 3, 4, 5
 ``````
 number_seed = [1234, 123, 12, 42, 1]
 accuracy_list = []
@@ -661,26 +664,33 @@ def round_five_iter(number_seed, verbose_see=1) :
     print(f"{'-'*100}")
 ``````
 ### Round 1
+End in 73 epochs 
 ``````
 round_five_iter(1234,1)
 ``````
 ### Round 2
+End in 88 epochs 
 ``````
 round_five_iter(123, 1)
 ``````
 ### Round 3
+End in 69 epochs 
 ``````
 round_five_iter(12, 0)
 ``````
 ### Round 4
+End in 57 epochs 
 ``````
 round_five_iter(42, 0)
 ``````
 ### Round 5
+End in 57 epochs 
 ``````
 round_five_iter(1, 0)
 ``````
->measure accuracy_list
+measure accuracy_list
+
+training time per epoch : 7ms 
 ``````
 mean_acc = statistics.mean(accuracy_list)
 SD_acc = statistics.stdev(accuracy_list)
