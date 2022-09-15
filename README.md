@@ -1,5 +1,4 @@
 # DADS7202-Deep Learning Hw01
-## test
 
 ## About Dataset
 A third-party travel insurance servicing company that is based in Singapore.
@@ -182,6 +181,7 @@ from sklearn.metrics import f1_score, roc_auc_score, recall_score, precision_sco
 from sklearn.feature_selection import SelectFromModel
 ``````
 Remember that our data is imbalanced data. Need to show how difference between doing imbalanced or not.
+First, we do an traditional data.
 ``````
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=42, stratify=Y)
 ``````
@@ -205,6 +205,7 @@ results = pd.DataFrame(values[1:], columns=values[0])
 results
 ``````
 ![Screenshot 2022-09-15 003514](https://user-images.githubusercontent.com/113499057/190229948-2f9db5c5-551d-4a4f-ab7a-4e3ddfca9e37.jpg)
+Then we do data after imbalanced data.
 ``````
 # Undersampling for imbalanced data
 iht = InstanceHardnessThreshold(random_state=42)
