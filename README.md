@@ -419,6 +419,8 @@ df3 = df
 
 df
 ``````
+![Screenshot 2022-09-15 151319](https://user-images.githubusercontent.com/113499057/190356181-32a32dd1-5b5c-4cc9-892c-f9c2a7133ecf.jpg)
+
 Splitting the Data (Original DataFrame)
 ``````
 df1 = df
