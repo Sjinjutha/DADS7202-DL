@@ -278,7 +278,7 @@ grid_search = grid.fit(X_train_selected, y_res_train)
 
 print(grid_search.best_params_)
 ``````
-![Screenshot 2022-09-15 014502](https://user-images.githubusercontent.com/113499057/190237535-03a9ccb3-ad3c-4490-b4e9-67763189c132.jpg)
+![Screenshot 2022-09-15 135030](https://user-images.githubusercontent.com/113499057/190334904-902941dd-5f19-4534-9e79-74328166ba90.jpg)
 ``````
 rf = RandomForestClassifier(random_state=42)
 rf.fit(X_train_selected, y_res_train)
