@@ -648,6 +648,7 @@ def round_five_iter(number_seed, verbose_see=1) :
 ``````
 ### Round 1
 End in 73 epochs 
+Evaluation between X_test and y_test >> loss & accuracy are below. 
 ``````
 round_five_iter(1234,1)
 
