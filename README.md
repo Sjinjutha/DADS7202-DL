@@ -1,5 +1,8 @@
 # DADS7202-Deep Learning Hw01
 
+# INTRODUCTION
+As a consurance company, managing risk of product launching is a core of business. In this experiment we explored third-party travel insurance data based in Singapore, Using binary classification model with target attribute Claim status(Yes or No). Details shown below will lead you to know more about dataset, methodology and experimentation result.
+
 ## About Dataset
 A third-party travel insurance servicing company that is based in Singapore.
 
