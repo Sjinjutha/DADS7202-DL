@@ -600,8 +600,6 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpo
                                                                 save_best_only=True)
 es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
 ``````
-![Screenshot 2022-09-15 152459](https://user-images.githubusercontent.com/113499057/190374717-5ffd88ea-c171-4ed2-a67c-5fe469f3515a.jpg)
-
 Iteration round 1, 2, 3, 4, 5
 ``````
 number_seed = [1234, 123, 12, 42, 1]
