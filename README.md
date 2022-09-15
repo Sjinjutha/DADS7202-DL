@@ -700,6 +700,11 @@ print("SD is :", SD_acc)
 ``````
 ![Screenshot 2022-09-15 171740](https://user-images.githubusercontent.com/113499057/190379319-8ee78dc5-909a-4912-baba-60f39408288e.jpg)
 
+## Conclusion
+<img width="318" alt="Screenshot 2022-09-15 173931" src="https://user-images.githubusercontent.com/97572167/190383542-274e8291-aa6e-4404-8c86-10b1c7d93dd2.png">
+
+
+
 ## Reference
 [1] (2022) 'Explaining the Empirical Rule for Normal Distribution' from https://builtin.com/data-science/empirical-rule
 
