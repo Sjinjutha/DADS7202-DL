@@ -699,7 +699,7 @@ print("SD is :", SD_acc)
 ![Screenshot 2022-09-15 171740](https://user-images.githubusercontent.com/113499057/190379319-8ee78dc5-909a-4912-baba-60f39408288e.jpg)
 
 ## Reference
-[1] (2020) 'Explaining the Empirical Rule for Normal Distribution' from https://builtin.com/data-science/empirical-rule
+[1] (2022) 'Explaining the Empirical Rule for Normal Distribution' from https://builtin.com/data-science/empirical-rule
 
 [2] (2020) 'Instance Hardness Threshold' from https://towardsdatascience.com/instance-hardness-threshold-an-undersampling-method-to-tackle-imbalanced-classification-problems-6d80f91f0581
 
