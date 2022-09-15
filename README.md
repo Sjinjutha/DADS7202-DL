@@ -447,7 +447,6 @@ for train_index, test_index in sss.split(X_1, y_1):
     
 print(f"\nNew ratio (test:train) : {round(len(original_Xtest) / len(original_Xtrain), 2)}")
 ``````
-![Screenshot 2022-09-15 151347](https://user-images.githubusercontent.com/113499057/190363922-043cb2dc-b8ca-42ed-b170-48df9cf38c7f.jpg)
 ``````
 # Turn into an array
 original_Xtrain = original_Xtrain.values
@@ -463,8 +462,6 @@ print('Label Distributions: \n')
 print(train_counts_label/ len(original_ytrain))
 print(test_counts_label/ len(original_ytest))
 ``````
-![Screenshot 2022-09-15 151410](https://user-images.githubusercontent.com/113499057/190363951-b0d3e84e-23cd-4a92-902e-7e0e39055e6a.jpg)
-
 Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
 
 
@@ -485,7 +482,6 @@ new_df = normal_distributed_df.sample(frac=1, random_state=42)
 
 new_df
 ``````
-![Screenshot 2022-09-15 151438](https://user-images.githubusercontent.com/113499057/190363976-0beaf84b-f97d-4d73-b839-8c2778dc63c9.jpg)
 ``````
 print("Distribution of 'Claim' in the subsample dataset")
 print(round(new_df['Claim'].value_counts()/len(new_df),2))
@@ -664,26 +660,33 @@ def round_five_iter(number_seed, verbose_see=1) :
     print(f"{'-'*100}")
 ``````
 ### Round 1
+End in 73 epochs 
 ``````
 round_five_iter(1234,1)
 ``````
 ### Round 2
+End in 88 epochs 
 ``````
 round_five_iter(123, 1)
 ``````
 ### Round 3
+End in 69 epochs 
 ``````
 round_five_iter(12, 0)
 ``````
 ### Round 4
+End in 57 epochs 
 ``````
 round_five_iter(42, 0)
 ``````
 ### Round 5
+End in 57 epochs 
 ``````
 round_five_iter(1, 0)
 ``````
 measure accuracy_list
+
+training time per epoch : 7ms 
 ``````
 mean_acc = statistics.mean(accuracy_list)
 SD_acc = statistics.stdev(accuracy_list)
