@@ -696,7 +696,7 @@ SD_acc = statistics.stdev(accuracy_list)
 print("Mean is :", mean_acc)
 print("SD is :", SD_acc)
 ``````
-![Screenshot 2022-09-15 153154](https://user-images.githubusercontent.com/113499057/190375896-e100390d-befd-4e55-9975-23e8a8253cc0.jpg)
+![Screenshot 2022-09-15 171740](https://user-images.githubusercontent.com/113499057/190379319-8ee78dc5-909a-4912-baba-60f39408288e.jpg)
 
 ## Reference
 [1] (2020) 'Explaining the Empirical Rule for Normal Distribution' from https://builtin.com/data-science/empirical-rule
