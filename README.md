@@ -447,6 +447,7 @@ for train_index, test_index in sss.split(X_1, y_1):
     
 print(f"\nNew ratio (test:train) : {round(len(original_Xtest) / len(original_Xtrain), 2)}")
 ``````
+![Screenshot 2022-09-15 151347](https://user-images.githubusercontent.com/113499057/190363922-043cb2dc-b8ca-42ed-b170-48df9cf38c7f.jpg)
 ``````
 # Turn into an array
 original_Xtrain = original_Xtrain.values
@@ -462,6 +463,8 @@ print('Label Distributions: \n')
 print(train_counts_label/ len(original_ytrain))
 print(test_counts_label/ len(original_ytest))
 ``````
+![Screenshot 2022-09-15 151410](https://user-images.githubusercontent.com/113499057/190363951-b0d3e84e-23cd-4a92-902e-7e0e39055e6a.jpg)
+
 Random Under-Sampling : which basically consists of removing data in order to have a more balanced dataset and thus avoiding our models to overfitting
 
 
@@ -482,6 +485,7 @@ new_df = normal_distributed_df.sample(frac=1, random_state=42)
 
 new_df
 ``````
+![Screenshot 2022-09-15 151438](https://user-images.githubusercontent.com/113499057/190363976-0beaf84b-f97d-4d73-b839-8c2778dc63c9.jpg)
 ``````
 print("Distribution of 'Claim' in the subsample dataset")
 print(round(new_df['Claim'].value_counts()/len(new_df),2))
@@ -491,6 +495,8 @@ sns.countplot('Claim', data=new_df, palette=colors)
 plt.title('Equally Distributed Claim', fontsize=14)
 plt.show()
 ``````
+![Screenshot 2022-09-15 151611](https://user-images.githubusercontent.com/113499057/190362838-a5daee33-2287-4f90-a234-0504d1951f9b.jpg)
+
 Correlation matrices 
 
 Make sure we use the subsample in our correlation
@@ -511,6 +517,7 @@ sns.heatmap(sub_sample_corr, cmap='coolwarm_r', annot_kws={'size':20}, ax=ax2)
 ax2.set_title('SubSample Correlation Matrix \n (use for reference)', fontsize=14)
 plt.show()
 ``````
+
 Eliminate columns which got higher corr > 0.8
 ``````
 list_drop = []
@@ -575,6 +582,7 @@ model.compile(optimizer=sgd, loss='binary_crossentropy', metrics=['acc']) # spar
 
 model.summary()
 ``````
+check model.weights
 ``````
 checkpoint_filepath = "bestmodel_epoch{epoch:02d}_valloss{val_loss:.2f}.hdf5"
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpoint_filepath,
@@ -583,7 +591,37 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint( filepath=checkpo
                                                                 mode='max',
                                                                 save_best_only=True)
 es_1 = EarlyStopping(monitor='val_acc', mode='max', verbose=1, patience=patience_me, restore_best_weights=True)
+model_hist_1 = model.fit(X_train_1, y_train_1, batch_size=128, epochs=EPOCHS, verbose=1, 
+                      validation_split=0.3, callbacks=[es_1])
 ``````
+Summarize history for accuracy
+``````
+plt.figure(figsize=(15,5))
+plt.plot(model_hist_1.history['acc'])
+plt.plot(model_hist_1.history['val_acc'])
+plt.title('Train accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'val'], loc='upper left')
+plt.grid()
+plt.show()
+``````
+Summarize history for loss
+``````
+plt.figure(figsize=(15,5))
+plt.plot(model_hist_1.history['loss'])
+plt.plot(model_hist_1.history['val_loss'])
+plt.title('Train loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'val'], loc='upper right')
+plt.grid()
+plt.show()
+``````
+``````
+y_pred_1 = model.predict(X_test_1, batch_size=256, verbose=1, callbacks=[es_1] )
+results_1 = model.evaluate(X_test_1, y_test_1)
+print( f"{model.metrics_names} = {results_1}" )
 ``````
 Iteration round 1, 2, 3, 4, 5
 ``````
@@ -657,8 +695,6 @@ measure accuracy_list
 
 training time per epoch : 7ms 
 ``````
-print(f"accuracy_list: {accuracy_list}")
-
 mean_acc = statistics.mean(accuracy_list)
 SD_acc = statistics.stdev(accuracy_list)
  
@@ -676,5 +712,4 @@ print("SD is :", SD_acc)
 ## End Credit
 งานชิ้นนี้เป็นส่วนหนึ่งของวิชา DADS7202 Deep Learning หลักสูตรวิทยาศาสตร์มหาบัณฑิต คณะสถิติประยุกต์ สถาบันบัณฑิตพัฒนบริหารศาสตร์
 
-กลุ่ม สู้ DL แต่ DL สู้กลับ 
-สมาชิก: (1) 64xxxxxx03 (2) 64xxxxxx06 (3) 64xxxxxx13 (4) 64xxxxxx20
+กลุ่ม สู้ DL แต่ DL สู้กลับ สมาชิก: (1) 64xxxxxx03 (2) 64xxxxxx06 (3) 64xxxxxx13 (4) 64xxxxxx20
