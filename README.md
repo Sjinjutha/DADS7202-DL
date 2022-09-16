@@ -707,7 +707,6 @@ print("SD is :", SD_acc)
 
 From the results, it was found that MLP gave the highest accuracy = 0.77743±0.0084 and training time = 7ms per epoch.
 
-Note : In general, we will settle model in round 2 to be our model for use-case if we were ruled by accuracy rate.
 
 ## Discussion
 
